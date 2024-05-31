@@ -6,6 +6,7 @@ import "./index.css"; // Remove this line if not using custom styles
 import Profile from "./Utilities/profile";
 import { Context } from "./App";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const {
@@ -42,23 +43,25 @@ const Header = () => {
           : "flex justify-between items-center bg-white p-6 shadow-lg"
       }
     >
-      <div className="flex items-center space-x-4">
-        <img
-          aria-placeholder="Logo"
-          className="h-12 w-12 rounded-full"
-          src="https://static.vecteezy.com/system/resources/previews/016/471/452/original/abstract-modern-ecommerce-logo-ecommerce-logo-design-shop-logo-design-template-creative-ecommerce-logo-vector.jpg"
-          alt="Logo"
-        />
-        <h1
-          className={
-            currmode
-              ? "text-2xl font-bold text-white"
-              : "text-2xl font-bold text-gray-800"
-          }
-        >
-          E-Shop
-        </h1>
-      </div>
+      <Link to={"/"}>
+        <div className="flex items-center space-x-4">
+          <img
+            aria-placeholder="Logo"
+            className="h-12 w-12 rounded-full"
+            src="https://static.vecteezy.com/system/resources/previews/016/471/452/original/abstract-modern-ecommerce-logo-ecommerce-logo-design-shop-logo-design-template-creative-ecommerce-logo-vector.jpg"
+            alt="Logo"
+          />
+          <h1
+            className={
+              currmode
+                ? "text-2xl font-bold text-white"
+                : "text-2xl font-bold text-gray-800"
+            }
+          >
+            E-Shop
+          </h1>
+        </div>
+      </Link>
       <div className="flex-grow mx-10">
         <div
           className={
@@ -68,21 +71,33 @@ const Header = () => {
           }
         >
           <a
-            href="https://www.meesho.com/api/v1/navigation-tree"
+            href="todaysdeals"
             className="hover:text-blue-500 transition duration-300"
           >
             Today's Deals
           </a>
-          <a href="#" className="hover:text-blue-500 transition duration-300">
+          <a
+            href="newrel"
+            className="hover:text-blue-500 transition duration-300"
+          >
             New Releases
           </a>
-          <a href="#" className="hover:text-blue-500 transition duration-300">
+          <a
+            href="/clothing"
+            className="hover:text-blue-500 transition duration-300"
+          >
             Clothing
           </a>
-          <a href="#" className="hover:text-blue-500 transition duration-300">
+          <a
+            href="/electronics"
+            className="hover:text-blue-500 transition duration-300"
+          >
             Electronics
           </a>
-          <a href="#" className="hover:text-blue-500 transition duration-300">
+          <a
+            href="customerservice"
+            className="hover:text-blue-500 transition duration-300"
+          >
             Customer Service
           </a>
         </div>

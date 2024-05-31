@@ -4,6 +4,8 @@ import About from "./Utilities/about";
 import Header from "./header";
 import Body from "./body"; // Assuming you have a Body component in this path
 import Clothing from "./Utilities/clothing";
+import Electronics from "./Utilities/electronics";
+import Cart from "./Utilities/cart.jsx";
 
 export const Context = React.createContext();
 
@@ -75,6 +77,14 @@ const appRouter = createBrowserRouter([
       {
         path: "clothing",
         element: <Clothing />,
+      },
+      {
+        path: "electronics",
+        element: <Electronics />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },
