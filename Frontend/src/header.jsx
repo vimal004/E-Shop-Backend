@@ -102,8 +102,11 @@ const Header = () => {
           </a>
         </div>
       </div>
+
       <div className="flex items-center space-x-4">
-        <Button name={"Cart"} mode={currmode} altname={"Cart"} />
+        <Link to={"/cart"}>
+          <Button name={"Cart"} mode={currmode} altname={"Cart"} />
+        </Link>
         <input
           className="w-80 px-4 py-2 border border-gray-300 rounded-full shadow focus:outline-none
 

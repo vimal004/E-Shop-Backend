@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const { type } = require("os");
+const validator = require("validator");
 const userrouter = express.Router();
 userrouter.use(express.json());
 
@@ -16,14 +17,20 @@ mongoose
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
+    required: [true, "Email is required"],
     unique: true,
     trim: true,
+    validate: {
+      validator: (v) => {
+        return validator.isEmail(v);
+      },
+      message: (props) => `${props.value} is not a valid email address!`,
+    },
   },
   password: {
     type: String,
-    required: true,
-    minlength: 6,
+    required: [true, "Password is required"],
+    minlength: [6, "Password must be at least 6 characters long"],
   },
 });
 

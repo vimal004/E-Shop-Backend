@@ -13,6 +13,7 @@ const LoginModal = ({
   log,
 }) => {
   const [transition, setTransition] = useState(false);
+  const [sig, setsig] = useState(false);
   const { mail, setmail } = useContext(Context);
 
   useEffect(() => {
@@ -34,11 +35,8 @@ const LoginModal = ({
         logfn();
         setmail(email);
       })
-      .catch((error) => {
-        console.error(
-          "Invalid Credentials:",
-          error.response ? error.response.data : error.message
-        );
+      .catch(() => {
+        setsig(!sig);
       });
   };
 
@@ -108,6 +106,13 @@ const LoginModal = ({
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {sig ? (
+            <div className="text-red-500">
+              <h6>Login Unsuccessful. Try Again.</h6>
+            </div>
+          ) : (
+            <div></div>
+          )}
           <button
             type="submit"
             className={`w-full ${
