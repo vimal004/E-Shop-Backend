@@ -1,1 +1,1 @@
-A full stack MERN E-Commerce Website project
+A Full Stack MERN E-Commerce Website Project
