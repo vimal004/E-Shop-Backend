@@ -1,12 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import clothingImage from "./Utilities/pexels-solliefoto-298863.jpg";
 import Footer from "./footer";
 import Card from "./Utilities/card";
 import { Context } from "./App";
+import ShimmerCard from "./Utilities/shimmercard";
 
 const Body = () => {
   const { currmode } = useContext(Context);
-  return (
+  const [shimmer, setshimmer] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setshimmer(false);
+    }, 2000);
+  }, []);
+
+  return shimmer ? (
+    <div className="min-h-screen flex flex-wrap justify-center items-center gap-6 p-2">
+      <ShimmerCard />
+      <ShimmerCard />
+      <ShimmerCard />
+      <ShimmerCard />
+    </div>
+  ) : (
     <div
       className={`min-h-screen flex flex-col ${
         currmode ? "bg-gray-700" : "bg-white"
@@ -45,7 +61,6 @@ const Body = () => {
           mode={currmode}
         />
       </div>
-
       <Footer />
     </div>
   );

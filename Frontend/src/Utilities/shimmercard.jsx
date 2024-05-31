@@ -1,17 +1,18 @@
+// src/Utilities/shimmercard.jsx
 import React from "react";
 
 const ShimmerCard = () => {
   return (
-    <div className="max-w-sm rounded-lg overflow-hidden shadow-lg border border-gray-300 m-4 transform transition-transform duration-300 hover:scale-105 bg-white">
-      <div className="animate-shimmer">
-        <div className="shimmer-gradient h-40 w-full rounded-t-lg"></div>
-        <div className="px-6 py-4">
-          <div className="shimmer-gradient h-6 w-3/4 mb-4"></div>
-          <div className="shimmer-gradient h-4 w-1/2"></div>
-        </div>
+    <div className="w-72 h-96 bg-gray-300 rounded-lg overflow-hidden relative">
+      <div className="w-full h-3/5 bg-gray-400 animate-shimmer bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 bg-[length:200%_100%]"></div>
+      <div className="p-4 space-y-2">
+        <div className="w-4/5 h-6 bg-gray-400 animate-shimmer bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 bg-[length:200%_100%]"></div>
+        <div className="w-full h-6 bg-gray-400 animate-shimmer bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 bg-[length:200%_100%]"></div>
+        <div className="w-3/4 h-6 bg-gray-400 animate-shimmer bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 bg-[length:200%_100%]"></div>
       </div>
     </div>
   );
 };
 
 export default ShimmerCard;
+
