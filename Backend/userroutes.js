@@ -5,15 +5,6 @@ const validator = require("validator");
 const userrouter = express.Router();
 userrouter.use(express.json());
 
-mongoose
-  .connect("mongodb+srv://2004vimal:zaq1%40wsx@cluster0.6tktuqx.mongodb.net/")
-  .then(() => {
-    console.log("Mongo DB Connected!");
-  })
-  .catch((e) => {
-    console.log(e);
-  });
-
 const userSchema = new mongoose.Schema({
   email: {
     type: String,

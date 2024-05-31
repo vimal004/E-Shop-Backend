@@ -7,22 +7,16 @@ import ShimmerCard from "./Utilities/shimmercard";
 
 const Body = () => {
   const { currmode } = useContext(Context);
-  const [shimmer, setshimmer] = useState(true);
+  const [shimmer, setShimmer] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setshimmer(false);
-    }, 2000);
+    const timer = setTimeout(() => {
+      setShimmer(false);
+    }, 1500);
+    return () => clearTimeout(timer);
   }, []);
 
-  return shimmer ? (
-    <div className="min-h-screen flex flex-wrap justify-center items-center gap-6 p-2">
-      <ShimmerCard />
-      <ShimmerCard />
-      <ShimmerCard />
-      <ShimmerCard />
-    </div>
-  ) : (
+  return (
     <div
       className={`min-h-screen flex flex-col ${
         currmode ? "bg-gray-700" : "bg-white"
@@ -35,31 +29,47 @@ const Body = () => {
       >
         Shop Now!
       </h1>
-      <div className="flex-grow flex flex-wrap justify-center items-center gap-6 p-2">
-        <Card
-          title="Clothing"
-          description="Discover the latest trends in fashion."
-          image={clothingImage}
-          mode={currmode}
-        />
-        <Card
-          title="Electronic Gadgets"
-          description="Explore a wide range of electronic gadgets."
-          image="https://img.freepik.com/free-photo/workplace-business-modern-male-accessories-laptop-white_155003-1722.jpg?size=626&ext=jpg&ga=GA1.1.44546679.1716336000&semt=ais_user"
-          mode={currmode}
-        />
-        <Card
-          title="Kitchen"
-          description="Find kitchen essentials and appliances."
-          image="https://c1.wallpaperflare.com/preview/370/450/397/spoon-fork-knife-kitchen.jpg"
-          mode={currmode}
-        />
-        <Card
-          title="Sport Kits"
-          image="https://i.pinimg.com/originals/c4/c6/09/c4c60940da2d250e5472fe2fbf85f3e7.jpg"
-          description="Get ready for your favorite sports activities."
-          mode={currmode}
-        />
+      <div className="flex-grow flex flex-wrap justify-center items-center gap-6 p-2 relative">
+        <div
+          className={`absolute inset-x-0 top-6 flex flex-wrap justify-center items-center gap-6 p-2 transition-opacity duration-500 ${
+            shimmer ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <ShimmerCard />
+          <ShimmerCard />
+          <ShimmerCard />
+          <ShimmerCard />
+        </div>
+        <div
+          className={`transition-opacity duration-500 ${
+            shimmer ? "opacity-0" : "opacity-100"
+          } flex flex-wrap justify-center items-center gap-6 p-2`}
+        >
+          <Card
+            title="Clothing"
+            description="Discover the latest trends in fashion."
+            image={clothingImage}
+            mode={currmode}
+          />
+          <Card
+            title="Electronic Gadgets"
+            description="Explore a wide range of electronic gadgets."
+            image="https://img.freepik.com/free-photo/workplace-business-modern-male-accessories-laptop-white_155003-1722.jpg?size=626&ext=jpg&ga=GA1.1.44546679.1716336000&semt=ais_user"
+            mode={currmode}
+          />
+          <Card
+            title="Kitchen"
+            description="Find kitchen essentials and appliances."
+            image="https://c1.wallpaperflare.com/preview/370/450/397/spoon-fork-knife-kitchen.jpg"
+            mode={currmode}
+          />
+          <Card
+            title="Sport Kits"
+            image="https://i.pinimg.com/originals/c4/c6/09/c4c60940da2d250e5472fe2fbf85f3e7.jpg"
+            description="Get ready for your favorite sports activities."
+            mode={currmode}
+          />
+        </div>
       </div>
       <Footer />
     </div>
@@ -67,3 +77,4 @@ const Body = () => {
 };
 
 export default Body;
+
