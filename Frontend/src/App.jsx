@@ -6,6 +6,7 @@ import Body from "./body"; // Assuming you have a Body component in this path
 import Clothing from "./Utilities/clothing";
 import Electronics from "./Utilities/electronics";
 import Cart from "./Utilities/cart.jsx";
+import Item from "./Utilities/item.jsx";
 
 export const Context = React.createContext();
 
@@ -85,6 +86,10 @@ const appRouter = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "/:id",
+        element: <Item />,
       },
     ],
   },
