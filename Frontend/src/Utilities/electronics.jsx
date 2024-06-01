@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "./card1";
 import electronicsData from "./data";
 import ShimmerCard from "./shimmercard";
+import { Link } from "react-router-dom";
 
 const Electronics = () => {
   const [shimmer, setShimmer] = useState(true);
@@ -34,13 +35,15 @@ const Electronics = () => {
           } flex flex-wrap justify-center items-center gap-6 p-2`}
         >
           {data.map((d) => (
-            <Card
-              key={d.product_name}
-              name={d.product_name}
-              rating={d.rating}
-              price={d.price}
-              imageLink={d.image_link}
-            />
+            <Link to={d.product_name}>
+              <Card
+                key={d.product_name}
+                name={d.product_name}
+                rating={d.rating}
+                price={d.price}
+                imageLink={d.image_link}
+              />
+            </Link>
           ))}
         </div>
       </div>
@@ -49,4 +52,3 @@ const Electronics = () => {
 };
 
 export default Electronics;
-

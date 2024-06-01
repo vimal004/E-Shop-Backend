@@ -88,7 +88,7 @@ const appRouter = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "/:id",
+        path: "electronics/:id",
         element: <Item />,
       },
     ],
