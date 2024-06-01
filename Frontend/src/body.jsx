@@ -4,6 +4,7 @@ import Footer from "./footer";
 import Card from "./Utilities/card";
 import { Context } from "./App";
 import ShimmerCard from "./Utilities/shimmercard";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const { currmode } = useContext(Context);
@@ -45,18 +46,22 @@ const Body = () => {
             shimmer ? "opacity-0" : "opacity-100"
           } flex flex-wrap justify-center items-center gap-6 p-2`}
         >
-          <Card
-            title="Clothing"
-            description="Discover the latest trends in fashion."
-            image={clothingImage}
-            mode={currmode}
-          />
-          <Card
-            title="Electronic Gadgets"
-            description="Explore a wide range of electronic gadgets."
-            image="https://img.freepik.com/free-photo/workplace-business-modern-male-accessories-laptop-white_155003-1722.jpg?size=626&ext=jpg&ga=GA1.1.44546679.1716336000&semt=ais_user"
-            mode={currmode}
-          />
+          <Link to={"clothing"}>
+            <Card
+              title="Clothing"
+              description="Discover the latest trends in fashion."
+              image={clothingImage}
+              mode={currmode}
+            />
+          </Link>
+          <Link to={"electronics"}>
+            <Card
+              title="Electronic Gadgets"
+              description="Explore a wide range of electronic gadgets."
+              image="https://img.freepik.com/free-photo/workplace-business-modern-male-accessories-laptop-white_155003-1722.jpg?size=626&ext=jpg&ga=GA1.1.44546679.1716336000&semt=ais_user"
+              mode={currmode}
+            />
+          </Link>
           <Card
             title="Kitchen"
             description="Find kitchen essentials and appliances."
@@ -77,4 +82,3 @@ const Body = () => {
 };
 
 export default Body;
-

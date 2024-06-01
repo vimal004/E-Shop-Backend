@@ -5,7 +5,7 @@ const clothingData = [
     rating: "4.8",
     features: ["Breathable mesh upper", "Air cushioning", "Rubber outsole"],
     image_link:
-      "https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/qcc3yodtez5fq1fk6epx/air-max-270-mens-shoe-2TtqTn.jpg",
+      "https://i8.amplience.net/i/jpl/jd_AH8050-002_C_0001_a?qlt=92",
   },
   {
     product_name: "Adidas Ultraboost",
@@ -13,7 +13,7 @@ const clothingData = [
     rating: "4.7",
     features: ["Primeknit upper", "Boost cushioning", "Stretchweb outsole"],
     image_link:
-      "https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy/8d6d936f02b046379209ac24015956b9_9366/Ultraboost_Shoes_White_FW4904_01_standard.jpg",
+      "https://www.sneakerfiles.com/wp-content/uploads/2016/11/adidas-ultra-boost-3-0-black-white.jpg",
   },
   {
     product_name: "Levi's 501 Original Fit Jeans",
@@ -29,7 +29,7 @@ const clothingData = [
     rating: "4.5",
     features: ["100% Cotton", "Slim fit", "Button-down collar"],
     image_link:
-      "https://lp2.hm.com/hmgoepprod?set=quality[79],source[/4c/57/4c57cb1529d28dc9b2cbac60ec77fb59d046d6ab.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+      "https://spy.com/wp-content/uploads/2021/06/HM-3-pack-Slim-Fit-T-shirts.jpeg?resize=285",
   },
   {
     product_name: "Zara Basic Blazer",
@@ -37,15 +37,14 @@ const clothingData = [
     rating: "4.7",
     features: ["Polyester blend", "Notched lapel", "Two-button closure"],
     image_link:
-      "https://static.zara.net/photos///2022/I/0/1/p/2212/656/400/2/w/1920/2212656400_1_1_1.jpg?ts=1660518662750",
+      "https://static.zara.net/photos/2023/V/0/1/p/2753/991/485/2/2753991485_6_1_1.jpg?ts=1676367753559",
   },
   {
     product_name: "Under Armour Tech Polo",
     price: "$39.99",
     rating: "4.8",
     features: ["Polyester fabric", "Moisture-wicking", "Anti-odor technology"],
-    image_link:
-      "https://underarmour.scene7.com/is/image/Underarmour/V5_NF0_1328495-001_F/?&wid=1666&hei=1666&fmt=jpg&qlt=80&op_sharpen=1&resMode=sharp2&op_usm=0.8,1.0,6,0&iccEmbed=0&icc=AdobeRGB",
+    image_link:"https://underarmour.brandedmerchstores.com/media/catalog/product/cache/250a04c635b9993d1f29fe23be596ba9/u/a/ua1233723_lg_13.jpg",
   },
   {
     product_name: "Ralph Lauren Polo Shirt",
@@ -53,7 +52,7 @@ const clothingData = [
     rating: "4.6",
     features: ["Cotton mesh", "Classic fit", "Embroidered pony logo"],
     image_link:
-      "https://slimages.macys.com/is/image/MCY/products/5/optimized/16798365_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$",
+      "https://th.bing.com/th/id/OIP.YEs1ZQykMm2lc5L8vbdcHAHaHa?w=580&h=580&rs=1&pid=ImgDetMain",
   },
   {
     product_name: "Gap Classic Chinos",
@@ -69,7 +68,7 @@ const clothingData = [
     rating: "4.7",
     features: ["Cotton blend", "Drawstring hood", "Front pouch pocket"],
     image_link:
-      "https://www.tommy.com/resources/img/designer-landing/header/tommy-hilfiger-logo-tommy-hilfiger-signature-hoodie-pullover-men-dw0dw09222-0gw.jpg",
+      "https://d13qso5xfejx18.cloudfront.net/product-media/7FT5/580/580/0G0A1006.jpg",
   },
   {
     product_name: "Puma Essentials Sweatpants",
@@ -77,7 +76,7 @@ const clothingData = [
     rating: "4.6",
     features: ["Cotton blend", "Elastic waistband", "Side pockets"],
     image_link:
-      "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/532497/01/sv01/fnd/PNA/fmt/png/Essentials-Men's%20Sweatpants",
+      "https://th.bing.com/th/id/OIP.VHvPVUyCmjfvg1DUMeQEeQHaHa?rs=1&pid=ImgDetMain",
   },
 ];
 

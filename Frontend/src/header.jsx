@@ -71,7 +71,7 @@ const Header = () => {
           }
         >
           <a
-            href="todaysdeals"
+            href="/"
             className="hover:text-blue-500 transition duration-300"
           >
             Today's Deals
