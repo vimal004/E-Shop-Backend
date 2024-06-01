@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import dat from "./data";
+import clothingData from "./data1";
 import { useState } from "react";
 
-const Item = () => {
+const Item1 = () => {
   const { id } = useParams();
-  const data = dat.find((d) => d.product_name === id);
+  const data = clothingData.find((d) => d.product_name === id);
   const [inStock, setInStock] = useState(true); // Replace with actual stock check logic
   const [reviews, setReviews] = useState([
     { name: "Alice", rating: 5, comment: "Great product!" },
@@ -25,7 +25,9 @@ const Item = () => {
     <div className="p-6">
       <div className="flex flex-col md:flex-row md:justify-center md:items-center">
         <div className="md:w-1/2">
-          <img className="w-100 h-100 object-cover rounded mx-8" src={data.image_link} alt={data.product_name} />
+          <div className="relative overflow-hidden w-80 h-80 mx-auto">
+            <img className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-125" src={data.image_link} alt={data.product_name} />
+          </div>
         </div>
         <div className="md:w-1/2 md:pl-6">
           <h1 className="text-3xl font-bold mb-4">{data.product_name}</h1>
@@ -78,4 +80,5 @@ const Item = () => {
   );
 };
 
-export default Item;
+export default Item1;
+

@@ -95,7 +95,7 @@ const Header = () => {
             Electronics
           </a>
           <a
-            href="customerservice"
+            href="/customerservice"
             className="hover:text-blue-500 transition duration-300"
           >
             Customer Service
