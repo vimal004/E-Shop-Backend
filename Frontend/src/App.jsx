@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import About from "./Utilities/about";
 import Header from "./header";
@@ -16,7 +16,13 @@ const App = () => {
   const [regi, setregi] = useState(false);
   const [r, setr] = useState(false);
   const [reg, setreg] = useState(false);
-  const [currmode, setmode] = useState(false);
+  const [currmode, setmode] = useState(() => {
+    return localStorage.getItem('currmode') === 'true';
+  });
+
+   useEffect(() => {
+    localStorage.setItem('currmode', currmode);
+  }, [currmode]);
 
   const togglefunc = () => {
     setmode(!currmode);
