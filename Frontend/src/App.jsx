@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, createBrowserRouter } from "react-router-dom";
+import { Outlet, createBrowserRouter, useFetcher } from "react-router-dom";
 import About from "./Utilities/about";
 import Header from "./header";
 import Body from "./body"; // Assuming you have a Body component in this path
@@ -16,12 +16,19 @@ const App = () => {
   const [regi, setregi] = useState(false);
   const [r, setr] = useState(false);
   const [reg, setreg] = useState(false);
+  const [log, setlog] = useState(() => {
+    return localStorage.getItem("logmode") === "true";
+  });
+  useEffect(() => {
+    localStorage.setItem("logmode", log);
+  }, [log]);
+
   const [currmode, setmode] = useState(() => {
-    return localStorage.getItem('currmode') === 'true';
+    return localStorage.getItem("currmode") === "true";
   });
 
-   useEffect(() => {
-    localStorage.setItem('currmode', currmode);
+  useEffect(() => {
+    localStorage.setItem("currmode", currmode);
   }, [currmode]);
 
   const togglefunc = () => {
@@ -33,7 +40,6 @@ const App = () => {
     setlgnmodal(!lgnmodal);
   };
 
-  const [log, setlog] = useState(false);
   const logfn = () => {
     setlog(!log);
   };
