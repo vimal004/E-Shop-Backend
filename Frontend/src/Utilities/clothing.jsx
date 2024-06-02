@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Card from "./card1";
 import clothingData from "./data1";
 import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
+import { Context } from "../App";
 
 const Clothing = () => {
   const [shimmer, setShimmer] = useState(true);
   const data = clothingData;
+  const { currmode } = useContext(Context);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,8 +18,18 @@ const Clothing = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <h1 className="text-center text-3xl font-bold mt-7 mb-4">Clothing</h1>
+    <div
+      className={`min-h-screen flex flex-col ${
+        currmode ? "bg-gray-700" : "bg-white"
+      }`}
+    >
+      <h1
+        className={`text-center text-3xl font-bold mt-7 mb-4 ${
+          currmode ? "text-white" : "text-black"
+        }`}
+      >
+        Clothing
+      </h1>
       <div className="flex-grow flex flex-wrap justify-center items-center gap-6 p-2 relative">
         <div
           className={`absolute inset-x-0 top-6 flex flex-wrap justify-center items-center gap-6 p-2 transition-opacity duration-500 ${
@@ -42,6 +54,7 @@ const Clothing = () => {
                 rating={d.rating}
                 price={d.price}
                 imageLink={d.image_link}
+                mode={currmode}
               />
             </Link>
           ))}

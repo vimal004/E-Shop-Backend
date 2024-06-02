@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Card from "./card1";
 import electronicsData from "./data";
+import { Context } from "../App";
 import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
 
 const Electronics = () => {
   const [shimmer, setShimmer] = useState(true);
   const data = electronicsData;
+  const { currmode } = useContext(Context);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,8 +18,18 @@ const Electronics = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <h1 className="text-center text-3xl font-bold mt-7 mb-4">Electronics</h1>
+    <div
+      className={`min-h-screen flex flex-col ${
+        currmode ? "bg-gray-700" : "bg-white"
+      }`}
+    >
+      <h1
+        className={`text-center text-3xl font-bold mt-7 mb-4 ${
+          currmode ? "text-white" : "text-black"
+        }`}
+      >
+        Electronics
+      </h1>
       <div className="flex-grow flex flex-wrap justify-center items-center gap-6 p-2 relative">
         <div
           className={`absolute inset-x-0 top-6 flex flex-wrap justify-center items-center gap-6 p-2 transition-opacity duration-500 ${
@@ -42,6 +54,7 @@ const Electronics = () => {
                 rating={d.rating}
                 price={d.price}
                 imageLink={d.image_link}
+                mode={currmode}
               />
             </Link>
           ))}
