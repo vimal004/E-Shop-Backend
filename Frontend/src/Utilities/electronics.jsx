@@ -61,7 +61,6 @@ const Electronics = () => {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

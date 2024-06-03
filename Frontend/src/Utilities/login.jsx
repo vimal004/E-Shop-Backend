@@ -14,7 +14,7 @@ const LoginModal = ({
 }) => {
   const [transition, setTransition] = useState(false);
   const [sig, setsig] = useState(false);
-  const { mail, setmail } = useContext(Context);
+  const { mail, setmail, times, settimes } = useContext(Context);
 
   useEffect(() => {
     setTransition(show);
@@ -34,6 +34,7 @@ const LoginModal = ({
       .then(() => {
         logfn();
         setmail(email);
+        settimes(1);
       })
       .catch(() => {
         setsig(!sig);
@@ -41,9 +42,13 @@ const LoginModal = ({
   };
 
   return log ? (
-    <div>
-      <SignedIn />
-    </div>
+    times ? (
+      <div>
+        <SignedIn />
+      </div>
+    ) : (
+      <div></div>
+    )
   ) : (
     <div
       className={`fixed inset-0 flex items-center justify-center transition-opacity duration-500 ${

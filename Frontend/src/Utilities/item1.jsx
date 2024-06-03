@@ -116,7 +116,6 @@ const Item1 = () => {
           <p>No reviews yet.</p>
         )}
       </div>
-      <Footer />
     </div>
   );
 };

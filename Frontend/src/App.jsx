@@ -9,6 +9,7 @@ import Cart from "./Utilities/cart.jsx";
 import Item from "./Utilities/item.jsx";
 import Item1 from "./Utilities/item1.jsx";
 import CustomerService from "./Utilities/cs.jsx";
+import Footer from "./footer.jsx";
 
 export const Context = React.createContext();
 
@@ -81,6 +82,7 @@ const App = () => {
       <div className="">
         <Header />
         <Outlet />
+        <Footer />
       </div>
     </Context.Provider>
   );

@@ -61,7 +61,6 @@ const Clothing = () => {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

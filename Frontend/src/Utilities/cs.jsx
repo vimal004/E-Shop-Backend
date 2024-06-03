@@ -117,7 +117,6 @@ const CustomerService = () => {
           </p>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
