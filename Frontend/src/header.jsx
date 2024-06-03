@@ -29,8 +29,11 @@ const Header = () => {
     settext,
     search,
     setsearch,
+    cart,
+    setcart,
   } = useContext(Context);
   const [lgn, setlgn] = useState("Login");
+  
   const lgtoggle = () => {
     lgn === "Login" ? setlgn("Logout") : setlgn("Login");
   };

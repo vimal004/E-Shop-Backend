@@ -15,6 +15,7 @@ import SearchBody from "./Utilities/searchbdy.jsx";
 export const Context = React.createContext();
 
 const App = () => {
+  const [cart, setcart] = useState([]);
   const [times, settimes] = useState(0);
   const [search, setsearch] = useState(false);
   const [text, settext] = useState("");
@@ -27,6 +28,10 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("logmode", log);
   }, [log]);
+
+  useEffect(() => {
+    localStorage.setItem("cart", cart);
+  }, [cart]);
 
   const [currmode, setmode] = useState(() => {
     return localStorage.getItem("currmode") === "true";
@@ -86,6 +91,8 @@ const App = () => {
     settext,
     search,
     setsearch,
+    cart,
+    setcart,
   };
 
   return (
@@ -118,7 +125,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "electronics",
-        element: < Electronics />,
+        element: <Electronics />,
       },
       {
         path: "cart",

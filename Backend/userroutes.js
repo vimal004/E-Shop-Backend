@@ -25,7 +25,18 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model("User", userSchema);
+const itemSchema = new mongoose.Schema({
+  id: String,
+  product_name: String,
+  price: String,
+  rating: String,
+  features: [String],
+  image_link: String,
+});
+
+const Item = new mongoose.model("Item", itemSchema);
+
+const User = new mongoose.model("User", userSchema);
 
 userrouter.post("/register", async (req, res) => {
   try {
@@ -55,6 +66,13 @@ userrouter.post("/login", async (req, res) => {
     res.status(500).send("Server Error");
     console.log("Server Error:", error.message);
   }
+});
+
+userrouter.post("/cart", async (req, res) => {
+  const resu = await new Item(req.body);
+  const result = await resu.save();
+  console.log(result);
+  res.send(result);
 });
 
 module.exports = userrouter;

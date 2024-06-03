@@ -7,7 +7,7 @@ import Footer from "../footer";
 const Item = () => {
   const { id } = useParams();
   const data = dat.find((d) => d.product_name === id);
-  const { currmode } = useContext(Context);
+  const { currmode, cart, setcart } = useContext(Context);
 
   // Mock data for stock status and reviews
   const [inStock] = useState(true);
