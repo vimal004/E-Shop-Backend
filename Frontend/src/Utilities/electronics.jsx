@@ -4,6 +4,7 @@ import electronicsData from "./data";
 import { Context } from "../App";
 import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
+import Footer from "../footer";
 
 const Electronics = () => {
   const [shimmer, setShimmer] = useState(true);
@@ -60,6 +61,7 @@ const Electronics = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

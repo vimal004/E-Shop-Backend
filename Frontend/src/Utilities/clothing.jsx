@@ -4,6 +4,7 @@ import clothingData from "./data1";
 import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
 import { Context } from "../App";
+import Footer from "../footer";
 
 const Clothing = () => {
   const [shimmer, setShimmer] = useState(true);
@@ -60,6 +61,7 @@ const Clothing = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

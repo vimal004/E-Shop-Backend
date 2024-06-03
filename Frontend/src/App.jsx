@@ -13,6 +13,7 @@ import CustomerService from "./Utilities/cs.jsx";
 export const Context = React.createContext();
 
 const App = () => {
+  const [times, settimes] = useState(0);
   const [regi, setregi] = useState(false);
   const [r, setr] = useState(false);
   const [reg, setreg] = useState(false);
@@ -35,7 +36,14 @@ const App = () => {
     setmode(!currmode);
   };
 
-  const [lgnmodal, setlgnmodal] = useState(false);
+  const [lgnmodal, setlgnmodal] = useState(() => {
+    return localStorage.getItem("lgnmodal") === "true";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("lgnmodal", lgnmodal);
+  }, [lgnmodal]);
+
   const lgntoggle = () => {
     setlgnmodal(!lgnmodal);
   };
@@ -64,6 +72,8 @@ const App = () => {
     togglefunc,
     regi,
     setregi,
+    times,
+    settimes,
   };
 
   return (
