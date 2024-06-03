@@ -5,11 +5,12 @@ import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
 import { Context } from "../App";
 import Footer from "../footer";
+import SearchBody from "./searchbdy";
 
 const Clothing = () => {
   const [shimmer, setShimmer] = useState(true);
   const data = clothingData;
-  const { currmode } = useContext(Context);
+  const { currmode, search } = useContext(Context);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,7 +19,9 @@ const Clothing = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  return (
+  return search ? (
+    <SearchBody />
+  ) : (
     <div
       className={`min-h-screen flex flex-col ${
         currmode ? "bg-gray-700" : "bg-white"

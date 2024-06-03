@@ -10,11 +10,13 @@ import Item from "./Utilities/item.jsx";
 import Item1 from "./Utilities/item1.jsx";
 import CustomerService from "./Utilities/cs.jsx";
 import Footer from "./footer.jsx";
+import SearchBody from "../src/Utilities/searchbdy.jsx"
 
 export const Context = React.createContext();
 
 const App = () => {
   const [times, settimes] = useState(0);
+  const [search, setsearch] = useState(false);
   const [text, settext] = useState("");
   const [regi, setregi] = useState(false);
   const [r, setr] = useState(false);
@@ -56,6 +58,10 @@ const App = () => {
 
   const [mail, setmail] = useState("");
 
+  useEffect(() => {
+    console.log(text);
+  }, [text]);
+
   const values = {
     mail,
     setmail,
@@ -76,6 +82,10 @@ const App = () => {
     setregi,
     times,
     settimes,
+    text,
+    settext,
+    search,
+    setsearch,
   };
 
   return (
@@ -108,7 +118,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "electronics",
-        element: <Electronics />,
+        element: < Electronics />,
       },
       {
         path: "cart",

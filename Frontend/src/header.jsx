@@ -25,15 +25,15 @@ const Header = () => {
     lgntoggle,
     logfn,
     togglefunc,
+    text,
+    settext,
+    search,
+    setsearch,
   } = useContext(Context);
   const [lgn, setlgn] = useState("Login");
   const lgtoggle = () => {
     lgn === "Login" ? setlgn("Logout") : setlgn("Login");
   };
-
-  useEffect(() => {
-    console.log("Header rendered");
-  }, []);
 
   return (
     <div
@@ -109,7 +109,12 @@ const Header = () => {
 
           focus:border-blue-500 transition duration-300"
           placeholder="Search for products, brands and more"
-          onChange={(e) => settext(e.target.value)}
+          onChange={(e) => {
+            settext(e.target.value);
+            e.target.value.length > 0 ? setsearch(true) : setsearch(false);
+            console.log(text);
+            console.log(search);
+          }}
         />
         <Button
           name={"Dark Mode"}
