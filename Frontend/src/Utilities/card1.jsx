@@ -15,7 +15,7 @@ const Card = ({ name, imageLink, rating, price, mode }) => {
             mode ? "text-white" : "text-gray-800"
           } hover:text-gray-400 cursor-pointer`}
         >
-          <Link to={"/:id"}> {name} </Link>
+          {name}
         </div>
         <p className={`text-base ${mode ? "text-gray-300" : "text-gray-700"}`}>
           Rating: {rating}
@@ -34,4 +34,3 @@ const Card = ({ name, imageLink, rating, price, mode }) => {
 };
 
 export default Card;
-
