@@ -10,7 +10,7 @@ import Item from "./Utilities/item.jsx";
 import Item1 from "./Utilities/item1.jsx";
 import CustomerService from "./Utilities/cs.jsx";
 import Footer from "./footer.jsx";
-import SearchBody from "../src/Utilities/searchbdy.jsx"
+import SearchBody from "./Utilities/searchbdy.jsx";
 
 export const Context = React.createContext();
 

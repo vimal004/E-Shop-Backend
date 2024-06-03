@@ -73,10 +73,7 @@ const Header = () => {
           <a href="/" className="hover:text-blue-500 transition duration-300">
             Today's Deals
           </a>
-          <a
-            href="newrel"
-            className="hover:text-blue-500 transition duration-300"
-          >
+          <a href="/" className="hover:text-blue-500 transition duration-300">
             New Releases
           </a>
           <a
@@ -112,8 +109,6 @@ const Header = () => {
           onChange={(e) => {
             settext(e.target.value);
             e.target.value.length > 0 ? setsearch(true) : setsearch(false);
-            console.log(text);
-            console.log(search);
           }}
         />
         <Button
