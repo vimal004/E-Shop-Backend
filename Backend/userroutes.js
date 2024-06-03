@@ -34,6 +34,7 @@ const itemSchema = new mongoose.Schema({
   rating: String,
   features: [String],
   image_link: String,
+  email: String,
 });
 
 const Item = new mongoose.model("Item", itemSchema);
@@ -70,11 +71,17 @@ userrouter.post("/login", async (req, res) => {
   }
 });
 
-userrouter.post("/cart", async (req, res) => {
+userrouter.post("/addcart", async (req, res) => {
   const resu = await new Item(req.body);
   const result = await resu.save();
   console.log(result);
   res.send(result);
 });
+
+userrouter.post("/getcart", async(req, res) => {
+  const resp = await Item.find(req.body);
+  res.send(resp);
+})
+
 
 module.exports = userrouter;

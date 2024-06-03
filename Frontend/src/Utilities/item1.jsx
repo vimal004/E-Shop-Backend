@@ -9,6 +9,7 @@ const Item1 = () => {
   const { id } = useParams();
   const data = clothingData.find((d) => d.product_name === id);
   const { currmode } = useContext(Context);
+  data.email = localStorage.getItem("email");
 
   // Mock data for stock status and reviews
   const [inStock] = useState(true);
@@ -22,7 +23,7 @@ const Item1 = () => {
     // Add to cart logic
     alert(`${data.product_name} added to cart!`);
     axios
-      .post("http://localhost:3000/api/users/cart", data)
+      .post("http://localhost:3000/api/users/addcart", data)
       .then((res) => {
         console.log(res);
       })

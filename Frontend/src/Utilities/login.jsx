@@ -34,6 +34,7 @@ const LoginModal = ({
       .then(() => {
         logfn();
         setmail(email);
+        localStorage.setItem("email", email);
         settimes(1);
       })
       .catch(() => {
