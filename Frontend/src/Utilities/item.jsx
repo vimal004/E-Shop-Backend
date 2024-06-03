@@ -40,7 +40,7 @@ const Item = () => {
             alt={data.product_name}
           />
         </div>
-        <div className="md:w-1/2 md:pl-6">
+        <div className="md:w-1/2 md:pl-6 m-8">
           <h1 className="text-3xl font-bold mb-4">{data.product_name}</h1>
           <h2 className="text-xl text-gray-700 mb-4">{data.price}</h2>
           <h3

@@ -48,7 +48,7 @@ const Clothing = () => {
           } flex flex-wrap justify-center items-center gap-6 p-2`}
         >
           {data.map((d) => (
-            <Link to={d.product_name}>
+            <Link to={d.product_name} key={d.product_name}>
               <Card
                 key={d.product_name}
                 name={d.product_name}

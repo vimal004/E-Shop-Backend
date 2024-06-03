@@ -70,10 +70,7 @@ const Header = () => {
               : "flex justify-center space-x-6 text-gray-700"
           }
         >
-          <a
-            href="/"
-            className="hover:text-blue-500 transition duration-300"
-          >
+          <a href="/" className="hover:text-blue-500 transition duration-300">
             Today's Deals
           </a>
           <a
@@ -112,6 +109,7 @@ const Header = () => {
 
           focus:border-blue-500 transition duration-300"
           placeholder="Search for products, brands and more"
+          onChange={(e) => settext(e.target.value)}
         />
         <Button
           name={"Dark Mode"}

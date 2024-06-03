@@ -15,6 +15,7 @@ export const Context = React.createContext();
 
 const App = () => {
   const [times, settimes] = useState(0);
+  const [text, settext] = useState("");
   const [regi, setregi] = useState(false);
   const [r, setr] = useState(false);
   const [reg, setreg] = useState(false);
