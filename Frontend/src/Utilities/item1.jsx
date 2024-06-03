@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import clothingData from "./data1";
 import { Context } from "../App";
+import axios from "axios";
 import Footer from "../footer";
 
 const Item1 = () => {
@@ -17,8 +18,17 @@ const Item1 = () => {
   ]);
 
   const handleAddToCart = () => {
+    console.log(data);
     // Add to cart logic
     alert(`${data.product_name} added to cart!`);
+    axios
+      .post("http://localhost:3000/api/users/cart", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleBuyNow = () => {

@@ -26,8 +26,10 @@ const userSchema = new mongoose.Schema({
 });
 
 const itemSchema = new mongoose.Schema({
-  id: String,
-  product_name: String,
+  product_name: {
+    type: String,
+    unique: true,
+  },
   price: String,
   rating: String,
   features: [String],

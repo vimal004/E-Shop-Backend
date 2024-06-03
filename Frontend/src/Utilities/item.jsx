@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import dat from "./data";
 import { Context } from "../App";
 import Footer from "../footer";
+import axios from "axios";
 
 const Item = () => {
   const { id } = useParams();
   const data = dat.find((d) => d.product_name === id);
-  const { currmode, cart, setcart } = useContext(Context);
+  const { currmode, cart, setcart, mail } = useContext(Context);
 
   // Mock data for stock status and reviews
   const [inStock] = useState(true);
@@ -15,10 +16,18 @@ const Item = () => {
     { name: "Alice", rating: 5, comment: "Great product!" },
     { name: "Bob", rating: 4, comment: "Very good, but could be improved." },
   ]);
-
   const handleAddToCart = () => {
+    console.log(data);
     // Add to cart logic
     alert(`${data.product_name} added to cart!`);
+    axios
+      .post("http://localhost:3000/api/users/cart", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleBuyNow = () => {
