@@ -30,7 +30,7 @@ const Item1 = () => {
     <div
       className={`p-6 ${
         currmode ? "bg-gray-700 text-white" : "bg-white text-black"
-      } rounded-lg shadow-lg`}
+      } rounded-none shadow-lg`}
     >
       <div className="flex flex-col md:flex-row md:justify-center md:items-center">
         <div className="md:w-1/2">
