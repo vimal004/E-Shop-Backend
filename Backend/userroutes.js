@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const { type } = require("os");
 const validator = require("validator");
 const userrouter = express.Router();
 userrouter.use(express.json());
@@ -12,9 +11,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     trim: true,
     validate: {
-      validator: (v) => {
-        return validator.isEmail(v);
-      },
+      validator: (v) => validator.isEmail(v),
       message: (props) => `${props.value} is not a valid email address!`,
     },
   },
@@ -29,29 +26,44 @@ const itemSchema = new mongoose.Schema({
   product_name: {
     type: String,
     unique: true,
+    required: true,
   },
-  price: String,
-  rating: String,
-  features: [String],
-  image_link: String,
-  email: String,
+  price: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: String,
+    required: true,
+  },
+  features: {
+    type: [String],
+    required: true,
+  },
+  image_link: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    validate: {
+      validator: (v) => validator.isEmail(v),
+      message: (props) => `${props.value} is not a valid email address!`,
+    },
+  },
 });
 
-const Item = new mongoose.model("Item", itemSchema);
-
-const User = new mongoose.model("User", userSchema);
+const Item = mongoose.model("Item", itemSchema);
+const User = mongoose.model("User", userSchema);
 
 userrouter.post("/register", async (req, res) => {
   try {
     const newUser = new User(req.body);
     const response = await newUser.save();
     res.status(201).send(response);
-    console.log(response);
   } catch (error) {
-    res
-      .status(500)
-      .send({ error: "Failed to create user", details: error.message });
-    console.error(error);
+    res.status(500).send({ error: "Failed to create user", details: error.message });
   }
 });
 
@@ -59,29 +71,33 @@ userrouter.post("/login", async (req, res) => {
   try {
     const user = await User.findOne(req.body);
     if (user) {
-      console.log("User found");
       res.status(200).send(user);
     } else {
       res.status(401).send("Invalid User Credentials");
-      console.log("Invalid User Credentials");
     }
   } catch (error) {
     res.status(500).send("Server Error");
-    console.log("Server Error:", error.message);
   }
 });
 
 userrouter.post("/addcart", async (req, res) => {
-  const resu = await new Item(req.body);
-  const result = await resu.save();
-  console.log(result);
-  res.send(result);
+  try {
+    const newItem = new Item(req.body);
+    const result = await newItem.save();
+    res.status(201).send(result);
+  } catch (error) {
+    res.status(500).send({ error: "Failed to add item to cart", details: error.message });
+  }
 });
 
-userrouter.post("/getcart", async(req, res) => {
-  const resp = await Item.find(req.body);
-  res.send(resp);
-})
-
+userrouter.post("/getcart", async (req, res) => {
+  try {
+    const items = await Item.find(req.body);
+    res.status(200).send(items);
+  } catch (error) {
+    res.status(500).send({ error: "Failed to retrieve cart items", details: error.message });
+  }
+});
 
 module.exports = userrouter;
+
