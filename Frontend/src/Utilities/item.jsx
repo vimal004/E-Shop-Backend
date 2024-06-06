@@ -7,8 +7,9 @@ import axios from "axios";
 const Item = () => {
   const { id } = useParams();
   const data = mergedData.find((d) => d.product_name === id);
-  const { currmode, cart, setcart, mail } = useContext(Context);
+  const { currmode, mail } = useContext(Context);
   data.email = localStorage.getItem("email");
+  const [cart, setcart] = useState(false);
 
   // Mock data for stock status and reviews
   const [inStock] = useState(true);
@@ -16,14 +17,12 @@ const Item = () => {
     { name: "Alice", rating: 5, comment: "Great product!" },
     { name: "Bob", rating: 4, comment: "Very good, but could be improved." },
   ]);
+
   const handleAddToCart = () => {
-    console.log(data);
-    // Add to cart logic
-    alert(`${data.product_name} added to cart!`);
     axios
       .post("http://localhost:3000/api/users/addcart", data)
       .then((res) => {
-        console.log(res);
+        setcart(true);
       })
       .catch((error) => {
         console.error(error);
@@ -39,6 +38,7 @@ const Item = () => {
         })
         .then((res) => {
           console.log(res);
+          setcart(false);
         });
     } catch {
       console.log("error");
@@ -92,9 +92,11 @@ const Item = () => {
               className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition ${
                 currmode ? "hover:bg-blue-600" : "hover:bg-blue-700"
               }`}
-              onClick={handleAddToCart}
+              onClick={() => {
+                cart ? handleDeleteCart() : handleAddToCart();
+              }}
             >
-              Add to Cart
+              {cart ? "Delete from Cart" : "Add to Cart"}
             </button>
             <button
               className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition ${
