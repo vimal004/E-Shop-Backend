@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import dat from "./data";
+import mergedData from "./data";
 import { Context } from "../App";
-import Footer from "../footer";
 import axios from "axios";
 
 const Item = () => {
   const { id } = useParams();
-  const data = dat.find((d) => d.product_name === id);
+  const data = mergedData.find((d) => d.product_name === id);
   const { currmode, cart, setcart, mail } = useContext(Context);
   data.email = localStorage.getItem("email");
 

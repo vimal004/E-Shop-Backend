@@ -7,10 +7,8 @@ import Clothing from "./Utilities/clothing";
 import Electronics from "./Utilities/electronics";
 import Cart from "./Utilities/cart.jsx";
 import Item from "./Utilities/item.jsx";
-import Item1 from "./Utilities/item1.jsx";
 import CustomerService from "./Utilities/cs.jsx";
 import Footer from "./footer.jsx";
-import SearchBody from "./Utilities/searchbdy.jsx";
 
 export const Context = React.createContext();
 
@@ -137,7 +135,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "clothing/:id",
-        element: <Item1 />,
+        element: <Item />,
       },
       {
         path: "customerservice",

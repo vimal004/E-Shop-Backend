@@ -1,16 +1,19 @@
 import React, { useContext } from "react";
 import { Context } from "../App";
 import Card from "./card1";
-import clothingData from "./data1";
 import { Link } from "react-router-dom";
+import mergedData from "./data";
 
 const SearchBody = () => {
   const { text, currmode } = useContext(Context);
   const searchText = text.toLowerCase(); // Convert search text to lowercase
 
   // Filter products based on search text
-  const filteredProducts = clothingData.filter((d) =>
-    d.product_name.toLowerCase().includes(searchText)
+  const filteredProducts = mergedData.filter(
+    (d) =>
+      d.id > 10 &&
+      d.id < 21 &&
+      d.product_name.toLowerCase().includes(searchText)
   );
 
   // Check if there are items found
@@ -61,4 +64,3 @@ const SearchBody = () => {
 };
 
 export default SearchBody;
-

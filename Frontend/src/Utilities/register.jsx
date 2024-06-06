@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../App";
 import axios from "axios";
-import Registered from "./registered";
 
 const RegisterModal = ({
   show,

@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import Card from "./card1";
-import electronicsData from "./data";
 import { Context } from "../App";
 import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
-import Footer from "../footer";
 import SearchBody from "./searchbdy";
+import mergedData from "./data";
 
 const Electronics = () => {
   const [shimmer, setShimmer] = useState(true);
-  const data = electronicsData;
+  const data = mergedData.filter((d) => d.id < 11);
   const { currmode, search } = useContext(Context);
 
   useEffect(() => {
