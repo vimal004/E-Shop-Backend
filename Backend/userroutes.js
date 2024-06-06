@@ -108,7 +108,6 @@ userrouter.post("/getcart", async (req, res) => {
 userrouter.delete("/deletecart", async (req, res) => {
   try {
     const response = await Item.deleteOne(req.body);
-    console.log(response);
     res.send(response);
   } catch (error) {
     res
@@ -120,12 +119,10 @@ userrouter.delete("/deletecart", async (req, res) => {
 userrouter.delete("/deleteall", async (req, res) => {
   try {
     const response = await Item.deleteMany(req.body);
-    console.log(response);
     res.send(response);
   } catch (error) {
     res
-      .status(500)
-      .send({ error: "Failed to retrieve cart items", details: error.message });
+      .send({ error: "Failed to delete all items", details: error.message });
   }
 });
 

@@ -33,7 +33,7 @@ const Profile = () => {
           onMouseLeave={handleMouseLeave}
         >
           <div>
-            <h6>{mail}</h6>
+            <h6>{localStorage.getItem("email")}</h6>
           </div>
           <button
             className="text-blue-500 hover:underline"
