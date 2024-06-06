@@ -50,8 +50,7 @@ const dat = [
     price: "$699",
     rating: "4.5",
     features: ["11-inch display", "128GB storage", "8GB RAM", "S Pen included"],
-    image_link:
-      "https://m.media-amazon.com/images/I/81QCuPs6IKL._SL1500_.jpg",
+    image_link: "https://m.media-amazon.com/images/I/81QCuPs6IKL._SL1500_.jpg",
   },
   {
     id: 7,
@@ -102,8 +101,7 @@ const clothingData = [
     price: "$150",
     rating: "4.8",
     features: ["Breathable mesh upper", "Air cushioning", "Rubber outsole"],
-    image_link:
-      "https://i8.amplience.net/i/jpl/jd_AH8050-002_C_0001_a?qlt=92",
+    image_link: "https://i8.amplience.net/i/jpl/jd_AH8050-002_C_0001_a?qlt=92",
   },
   {
     id: 12,
@@ -147,7 +145,8 @@ const clothingData = [
     price: "$39.99",
     rating: "4.8",
     features: ["Polyester fabric", "Moisture-wicking", "Anti-odor technology"],
-    image_link:"https://underarmour.brandedmerchstores.com/media/catalog/product/cache/250a04c635b9993d1f29fe23be596ba9/u/a/ua1233723_lg_13.jpg",
+    image_link:
+      "https://underarmour.brandedmerchstores.com/media/catalog/product/cache/250a04c635b9993d1f29fe23be596ba9/u/a/ua1233723_lg_13.jpg",
   },
   {
     id: 17,
@@ -164,8 +163,7 @@ const clothingData = [
     price: "$49.95",
     rating: "4.5",
     features: ["Cotton blend", "Slim through the leg", "Zip fly"],
-    image_link:
-      "https://www.gap.com/webcontent/0019/624/139/cn19624139.jpg",
+    image_link: "https://www.gap.com/webcontent/0019/624/139/cn19624139.jpg",
   },
   {
     id: 19,
@@ -195,16 +193,20 @@ const kitchenProducts = [
     rating: "4.8",
     features: ["Pressure cooker", "Slow cooker", "Rice cooker", "Steamer"],
     image_link:
-      "https://m.media-amazon.com/images/I/81ZaoM93bwL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.u2V3QdAy7Z7HguYV0A-o-QHaI7?w=138&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 22,
     product_name: "Vitamix 5200 Blender",
     price: "$449.95",
     rating: "4.9",
-    features: ["64-ounce container", "Stainless steel blades", "Variable speed control"],
+    features: [
+      "64-ounce container",
+      "Stainless steel blades",
+      "Variable speed control",
+    ],
     image_link:
-      "https://m.media-amazon.com/images/I/81Sw6t2a3WL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.LxBg78B1lPqAq_EVXXasVwHaHa?w=200&h=200&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 23,
@@ -213,7 +215,7 @@ const kitchenProducts = [
     rating: "4.7",
     features: ["5-quart bowl", "10 speeds", "Tilt-head design"],
     image_link:
-      "https://m.media-amazon.com/images/I/71MZ-hbiwzL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.eNw77iDyPtWBJIBQ_XAmwAHaHa?w=188&h=188&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 24,
@@ -222,7 +224,7 @@ const kitchenProducts = [
     rating: "4.6",
     features: ["4-quart capacity", "Dehydrate function", "Crisper plate"],
     image_link:
-      "https://m.media-amazon.com/images/I/71cR40zu9EL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.uqK1v9UMlRoaO3tkx5ay5gHaGI?w=225&h=186&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 25,
@@ -231,7 +233,7 @@ const kitchenProducts = [
     rating: "4.5",
     features: ["12-piece set", "Hard anodized", "Non-stick"],
     image_link:
-      "https://m.media-amazon.com/images/I/81ay4hC-S6L._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.h2GCkILSSrYIwAB1TW8MwAHaHa?w=193&h=193&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 26,
@@ -240,7 +242,7 @@ const kitchenProducts = [
     rating: "4.8",
     features: ["Integrated grinder", "1600W", "Stainless steel"],
     image_link:
-      "https://m.media-amazon.com/images/I/81N6W8PAsDL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.NJshGbwHWvBhXU7w983eCAHaIl?w=163&h=189&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 27,
@@ -249,7 +251,7 @@ const kitchenProducts = [
     rating: "4.7",
     features: ["9-cup capacity", "Thermal carafe", "Programmable"],
     image_link:
-      "https://m.media-amazon.com/images/I/71I-Huv4h1L._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.SB0VvWCw_W73ZKVEOlX97wHaHa?w=187&h=187&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 28,
@@ -258,7 +260,7 @@ const kitchenProducts = [
     rating: "4.6",
     features: ["Pre-seasoned", "12-inch", "Durable"],
     image_link:
-      "https://m.media-amazon.com/images/I/81Q0gwz2eDL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.d8LktJkJ15PwoLLEx9igMwHaHa?w=179&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 29,
@@ -267,7 +269,7 @@ const kitchenProducts = [
     rating: "4.5",
     features: ["1.7-liter", "Cordless", "Auto shutoff"],
     image_link:
-      "https://m.media-amazon.com/images/I/71tXOb+52rL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.b5zhDLcHyXo4RXOMNCCrTQHaHa?w=218&h=218&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 30,
@@ -276,7 +278,7 @@ const kitchenProducts = [
     rating: "4.7",
     features: ["600W", "24-ounce cup", "Stainless steel blades"],
     image_link:
-      "https://m.media-amazon.com/images/I/81Yk16mxKbL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.KLk6RzVgdRi62R0Nyb-vogHaHa?w=183&h=183&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
 ];
 
@@ -288,7 +290,7 @@ const sportsKits = [
     rating: "4.8",
     features: ["Composite leather", "Official size", "Indoor use"],
     image_link:
-      "https://m.media-amazon.com/images/I/91m5Ucm5jZL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.jL3Vjr09V1TXjNpZLj5IOwHaHc?w=196&h=197&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 32,
@@ -297,7 +299,7 @@ const sportsKits = [
     rating: "4.7",
     features: ["Anti-slip", "Lightweight", "5mm thickness"],
     image_link:
-      "https://m.media-amazon.com/images/I/71zmH3sCBPL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.eN3CcOLrR3Lh_Nb6cb4slQGQGQ?w=179&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 33,
@@ -306,7 +308,7 @@ const sportsKits = [
     rating: "4.6",
     features: ["Machine-stitched", "Butyl bladder", "Durable"],
     image_link:
-      "https://m.media-amazon.com/images/I/81WQLO9sw5L._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.q_QY7krJwMYhHEEB2deRPQHaHa?w=177&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 34,
@@ -315,7 +317,7 @@ const sportsKits = [
     rating: "4.8",
     features: ["Synthetic upper", "Rubber outsole", "High-top"],
     image_link:
-      "https://m.media-amazon.com/images/I/81+0IW9lSuL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.S0JF0JObh7JPs7DqmG6vjgHaHa?w=181&h=181&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 35,
@@ -324,7 +326,7 @@ const sportsKits = [
     rating: "4.7",
     features: ["Rubber cover", "Official size", "Outdoor use"],
     image_link:
-      "https://m.media-amazon.com/images/I/91ZErOaKdoL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.50BS4rfN_vvoK4HTZhbX1QHaHf?w=174&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 36,
@@ -333,7 +335,7 @@ const sportsKits = [
     rating: "4.9",
     features: ["Double barrel", "Composite material", "Ultra-thin handle"],
     image_link:
-      "https://m.media-amazon.com/images/I/61dVkp+mIvL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.WT2kDjAdqUeq_MEsazeuOAHaHa?w=185&h=185&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 37,
@@ -342,7 +344,7 @@ const sportsKits = [
     rating: "4.7",
     features: ["Anti-fog", "UV protection", "Adjustable strap"],
     image_link:
-      "https://m.media-amazon.com/images/I/81QsmH2x27L._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.JcXNsVl0FjoUpLHAwIl2-gHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 38,
@@ -351,7 +353,7 @@ const sportsKits = [
     rating: "4.8",
     features: ["Pro Stock leather", "Dual Welting", "Dri-Lex wrist lining"],
     image_link:
-      "https://m.media-amazon.com/images/I/81N6W8PAsDL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.DVjxCPQqSxSawpIkzor5ogHaHa?w=197&h=197&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 39,
@@ -360,7 +362,7 @@ const sportsKits = [
     rating: "4.6",
     features: ["Graphite frame", "Isometric head", "Lightweight"],
     image_link:
-      "https://m.media-amazon.com/images/I/71zmH3sCBPL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.iENbPpLMi86IFpX8tIjGJQHaO0?w=115&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
   {
     id: 40,
@@ -369,15 +371,10 @@ const sportsKits = [
     rating: "4.7",
     features: ["Net included", "Inflation pump", "Official size"],
     image_link:
-      "https://m.media-amazon.com/images/I/71zmH3sCBPL._AC_SX425_.jpg",
+      "https://th.bing.com/th/id/OIP.LKDXAD6Ptu4X4g0x6F-_gQHaHa?w=210&h=210&c=7&r=0&o=5&dpr=1.3&pid=1.7",
   },
 ];
 
-const mergedData = [
-  ...dat,
-  ...clothingData,
-  ...kitchenProducts,
-  ...sportsKits,
-];
+const mergedData = [...dat, ...clothingData, ...kitchenProducts, ...sportsKits];
 
 export default mergedData;
