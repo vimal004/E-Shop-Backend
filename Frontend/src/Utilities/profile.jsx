@@ -39,6 +39,7 @@ const Profile = () => {
             className="text-blue-500 hover:underline"
             onClick={() => {
               setlog(!log);
+              localStorage.setItem("email", "");
             }}
           >
             Sign Out

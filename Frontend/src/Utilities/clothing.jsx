@@ -4,7 +4,6 @@ import clothingData from "./data1";
 import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
 import { Context } from "../App";
-import Footer from "../footer";
 import SearchBody from "./searchbdy1";
 
 const Clothing = () => {

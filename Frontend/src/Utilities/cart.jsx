@@ -10,10 +10,12 @@ const Cart = () => {
   const [shimmer, setShimmer] = useState(true);
   const [data, setData] = useState([]);
   const email = localStorage.getItem("email");
+  const [mail, setEmail] = useState("");
   const { currmode, search } = useContext(Context);
 
   useEffect(() => {
-    if (email) {
+    if (email != "") {
+      setEmail(email);
       axios
         .post("http://localhost:3000/api/users/getcart", { email })
         .then((res) => {
@@ -23,12 +25,21 @@ const Cart = () => {
         .catch((error) => {
           console.log(error);
         });
+    } else {
+      console.log("no email");
+      setEmail("");
     }
   }, [email]);
 
-  return search ? (
-    <div>
-      <SearchBody />
+  return mail === "" ? (
+    <div
+      className={`min-h-screen flex flex-col ${
+        currmode ? "bg-gray-700 text-white" : "bg-white text-black"
+      }`}
+    >
+      <div className="text-center bold m-8">
+        <h1>Sign in to add items to the cart.</h1>
+      </div>
     </div>
   ) : (
     <div

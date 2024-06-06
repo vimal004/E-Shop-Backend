@@ -63,7 +63,9 @@ userrouter.post("/register", async (req, res) => {
     const response = await newUser.save();
     res.status(201).send(response);
   } catch (error) {
-    res.status(500).send({ error: "Failed to create user", details: error.message });
+    res
+      .status(500)
+      .send({ error: "Failed to create user", details: error.message });
   }
 });
 
@@ -86,7 +88,9 @@ userrouter.post("/addcart", async (req, res) => {
     const result = await newItem.save();
     res.status(201).send(result);
   } catch (error) {
-    res.status(500).send({ error: "Failed to add item to cart", details: error.message });
+    res
+      .status(500)
+      .send({ error: "Failed to add item to cart", details: error.message });
   }
 });
 
@@ -95,9 +99,20 @@ userrouter.post("/getcart", async (req, res) => {
     const items = await Item.find(req.body);
     res.status(200).send(items);
   } catch (error) {
-    res.status(500).send({ error: "Failed to retrieve cart items", details: error.message });
+    res
+      .status(500)
+      .send({ error: "Failed to retrieve cart items", details: error.message });
+  }
+});
+
+userrouter.delete("/deletecart", async (req, res) => {
+  try {
+    const response = await Item.deleteOne(req.body);
+    console.log(response);
+    res.send(response);
+  } catch {
+    console.log("Error");
   }
 });
 
 module.exports = userrouter;
-
