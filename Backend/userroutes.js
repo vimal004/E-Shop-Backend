@@ -110,8 +110,10 @@ userrouter.delete("/deletecart", async (req, res) => {
     const response = await Item.deleteOne(req.body);
     console.log(response);
     res.send(response);
-  } catch {
-    console.log("Error");
+  } catch (error) {
+    res
+      .status(500)
+      .send({ error: "Failed to retrieve cart items", details: error.message });
   }
 });
 
@@ -120,8 +122,10 @@ userrouter.delete("/deleteall", async (req, res) => {
     const response = await Item.deleteMany(req.body);
     console.log(response);
     res.send(response);
-  } catch {
-    console.log("Error");
+  } catch (error) {
+    res
+      .status(500)
+      .send({ error: "Failed to retrieve cart items", details: error.message });
   }
 });
 

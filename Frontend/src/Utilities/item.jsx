@@ -30,6 +30,21 @@ const Item = () => {
       });
   };
 
+  const handleDeleteCart = () => {
+    try {
+      axios
+        .delete("http://localhost:3000/api/users/deletecart", {
+          email: mail,
+          product_name: data.product_name,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    } catch {
+      console.log("error");
+    }
+  };
+
   const handleBuyNow = () => {
     // Buy now logic
     alert(`Proceeding to buy ${data.product_name}!`);
