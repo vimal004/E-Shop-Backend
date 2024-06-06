@@ -13,6 +13,17 @@ const Cart = () => {
   const [mail, setEmail] = useState("");
   const { currmode, search } = useContext(Context);
 
+  const handledelete = () => {
+    axios
+      .delete("http://localhost:3000/api/users/deleteall", { email: mail })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (email != "") {
       setEmail(email);
@@ -29,7 +40,7 @@ const Cart = () => {
       console.log("no email");
       setEmail("");
     }
-  }, [email]);
+  }, [email, data]);
 
   return mail === "" ? (
     <div
@@ -47,13 +58,23 @@ const Cart = () => {
         currmode ? "bg-gray-700" : "bg-white"
       }`}
     >
-      <h1
-        className={`text-center text-3xl font-bold mt-7 mb-4 ${
-          currmode ? "text-white" : "text-black"
-        }`}
-      >
-        Cart Items
-      </h1>
+      <div className="flex justify-between items-center px-4 mt-7 mb-4">
+        <div className="flex-1 text-center">
+          <h1
+            className={`text-3xl font-bold ${
+              currmode ? "text-white" : "text-black"
+            }`}
+          >
+            Cart Items
+          </h1>
+        </div>
+        <button
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-4"
+          onClick={handledelete}
+        >
+          Clear Cart
+        </button>
+      </div>
       <div className="flex-grow flex flex-wrap justify-center items-center gap-6 p-2 relative">
         <div
           className={`absolute inset-x-0 top-6 flex flex-wrap justify-center items-center gap-6 p-2 transition-opacity duration-500 ${
