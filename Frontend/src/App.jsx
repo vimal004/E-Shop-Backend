@@ -9,6 +9,8 @@ import Cart from "./Utilities/cart.jsx";
 import Item from "./Utilities/item.jsx";
 import CustomerService from "./Utilities/cs.jsx";
 import Footer from "./footer.jsx";
+import Sports from "./Utilities/sports.jsx";
+import Kitchen from "./Utilities/kitchen.jsx";
 
 export const Context = React.createContext();
 
@@ -126,6 +128,14 @@ const appRouter = createBrowserRouter([
         element: <Electronics />,
       },
       {
+        path: "sports",
+        element: <Sports />,
+      },
+      {
+        path: "kitchen",
+        element: <Kitchen />,
+      },
+      {
         path: "cart",
         element: <Cart />,
       },
@@ -135,6 +145,14 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "clothing/:id",
+        element: <Item />,
+      },
+      {
+        path: "kitchen/:id",
+        element: <Item />,
+      },
+      {
+        path: "sports/:id",
         element: <Item />,
       },
       {

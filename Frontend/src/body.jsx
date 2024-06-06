@@ -62,18 +62,22 @@ const Body = () => {
               mode={currmode}
             />
           </Link>
-          <Card
-            title="Kitchen"
-            description="Find kitchen essentials and appliances."
-            image="https://c1.wallpaperflare.com/preview/370/450/397/spoon-fork-knife-kitchen.jpg"
-            mode={currmode}
-          />
-          <Card
-            title="Sport Kits"
-            image="https://i.pinimg.com/originals/c4/c6/09/c4c60940da2d250e5472fe2fbf85f3e7.jpg"
-            description="Get ready for your favorite sports activities."
-            mode={currmode}
-          />
+          <Link to={"kitchen"}>
+            <Card
+              title="Kitchen"
+              description="Find kitchen essentials and appliances."
+              image="https://c1.wallpaperflare.com/preview/370/450/397/spoon-fork-knife-kitchen.jpg"
+              mode={currmode}
+            />
+          </Link>
+          <Link to={"sports"}>
+            <Card
+              title="Sport Kits"
+              image="https://i.pinimg.com/originals/c4/c6/09/c4c60940da2d250e5472fe2fbf85f3e7.jpg"
+              description="Get ready for your favorite sports activities."
+              mode={currmode}
+            />
+          </Link>
         </div>
       </div>
     </div>
