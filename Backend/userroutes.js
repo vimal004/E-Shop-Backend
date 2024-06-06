@@ -115,4 +115,14 @@ userrouter.delete("/deletecart", async (req, res) => {
   }
 });
 
+userrouter.delete("/deleteall", async (req, res) => {
+  try {
+    const response = await Item.deleteMany(req.body);
+    console.log(response);
+    res.send(response);
+  } catch {
+    console.log("Error");
+  }
+});
+
 module.exports = userrouter;
