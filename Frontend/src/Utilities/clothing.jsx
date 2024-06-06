@@ -3,7 +3,7 @@ import Card from "./card1";
 import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
 import { Context } from "../App";
-import SearchBody from "./searchbdy1";
+import SearchBody from "./searchbdy";
 import mergedData from "./data";
 
 const Clothing = () => {
@@ -19,7 +19,7 @@ const Clothing = () => {
   }, []);
 
   return search ? (
-    <SearchBody />
+    <SearchBody data={data}/>
   ) : (
     <div
       className={`min-h-screen flex flex-col ${

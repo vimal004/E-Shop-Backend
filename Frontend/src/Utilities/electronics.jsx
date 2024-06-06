@@ -20,7 +20,7 @@ const Electronics = () => {
 
   return search ? (
     <div>
-      <SearchBody />
+      <SearchBody data={data}/>
     </div>
   ) : (
     <div
