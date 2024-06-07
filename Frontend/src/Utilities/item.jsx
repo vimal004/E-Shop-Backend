@@ -18,6 +18,22 @@ const Item = () => {
     { name: "Bob", rating: 4, comment: "Very good, but could be improved." },
   ]);
 
+  const Exists = () => {
+    axios
+      .post("http://localhost:3000/api/users/itemexists", {
+        email: data.email,
+        product_name: data.product_name,
+      })
+      .then((res) => {
+        setcart(true);
+      })
+      .catch((error) => {
+        setcart(false);
+      });
+  };
+
+  Exists();
+
   const handleAddToCart = () => {
     axios
       .post("http://localhost:3000/api/users/addcart", data)

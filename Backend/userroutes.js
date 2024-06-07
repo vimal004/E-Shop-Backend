@@ -105,6 +105,21 @@ userrouter.post("/getcart", async (req, res) => {
   }
 });
 
+userrouter.post("/itemexists", async (req, res) => {
+  try {
+    const items = await Item.find(req.body);
+
+    if (items.length > 0) res.status(200).send(items);
+    else {
+      res.status(404).send("Item not found in the cart");
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .send({ error: "Failed to retrieve cart items", details: error.message });
+  }
+});
+
 userrouter.delete("/deletecart", async (req, res) => {
   try {
     const response = await Item.deleteOne(req.body);
