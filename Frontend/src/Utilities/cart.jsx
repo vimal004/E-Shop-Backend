@@ -12,7 +12,6 @@ const Cart = () => {
   const email = localStorage.getItem("email");
   const [mail, setEmail] = useState("");
   const { currmode, search } = useContext(Context);
-
   const handledelete = () => {
     axios
       .delete("http://localhost:3000/api/users/deleteall", { email: mail })
@@ -92,14 +91,16 @@ const Cart = () => {
           } flex flex-wrap justify-center items-center gap-6 p-2`}
         >
           {data.map((d) => (
-            <Card
-              key={d.product_name}
-              name={d.product_name}
-              rating={d.rating}
-              price={d.price}
-              imageLink={d.image_link}
-              mode={currmode}
-            />
+            <Link to={`http://localhost:5173/cart/${d.product_name}`}>
+              <Card
+                key={d.product_name}
+                name={d.product_name}
+                rating={d.rating}
+                price={d.price}
+                imageLink={d.image_link}
+                mode={currmode}
+              />
+            </Link>
           ))}
         </div>
       </div>

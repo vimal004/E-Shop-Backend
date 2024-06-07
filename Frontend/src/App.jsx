@@ -156,6 +156,10 @@ const appRouter = createBrowserRouter([
         element: <Item />,
       },
       {
+        path: "cart/:id",
+        element: <Item />,
+      },
+      {
         path: "customerservice",
         element: <CustomerService />,
       },
