@@ -25,10 +25,10 @@ const Item = () => {
         product_name: data.product_name,
       })
       .then((res) => {
-        setcart(true);
+        setcart(!cart);
       })
       .catch((error) => {
-        setcart(false);
+        setcart(cart);
       });
   };
 
@@ -54,7 +54,7 @@ const Item = () => {
         })
         .then((res) => {
           console.log(res);
-          setcart(false);
+          setcart(!cart);
         });
     } catch {
       console.log("error");
