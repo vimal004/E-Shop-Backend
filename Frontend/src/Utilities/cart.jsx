@@ -12,6 +12,7 @@ const Cart = () => {
   const email = localStorage.getItem("email");
   const [mail, setEmail] = useState("");
   const { currmode, search } = useContext(Context);
+
   const handledelete = () => {
     axios
       .delete("http://localhost:3000/api/users/deleteall", { email: mail })
@@ -24,7 +25,7 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    if (email != "") {
+    if (email !== "") {
       setEmail(email);
       axios
         .post("http://localhost:3000/api/users/getcart", { email })
@@ -75,6 +76,13 @@ const Cart = () => {
         </button>
       </div>
       <div className="flex-grow flex flex-wrap justify-center items-center gap-6 p-2 relative">
+        {data.length === 0 && (
+          <div className="text-center text-2xl font-bold mb-4">
+            <h1 className={currmode ? "text-white" : "text-black"}>
+              Cart is empty
+            </h1>
+          </div>
+        )}
         <div
           className={`absolute inset-x-0 top-6 flex flex-wrap justify-center items-center gap-6 p-2 transition-opacity duration-500 ${
             shimmer ? "opacity-100" : "opacity-0"
