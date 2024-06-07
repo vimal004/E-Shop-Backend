@@ -121,8 +121,7 @@ userrouter.delete("/deleteall", async (req, res) => {
     const response = await Item.deleteMany(req.body);
     res.send(response);
   } catch (error) {
-    res
-      .send({ error: "Failed to delete all items", details: error.message });
+    res.send({ error: "Failed to delete all items", details: error.message });
   }
 });
 

@@ -33,7 +33,7 @@ const Header = () => {
     setcart,
   } = useContext(Context);
   const [lgn, setlgn] = useState("Login");
-  
+
   const lgtoggle = () => {
     lgn === "Login" ? setlgn("Logout") : setlgn("Login");
   };
@@ -73,11 +73,17 @@ const Header = () => {
               : "flex justify-center space-x-6 text-gray-700"
           }
         >
-          <a href="/" className="hover:text-blue-500 transition duration-300">
-            Today's Deals
+          <a
+            href="/kitchen"
+            className="hover:text-blue-500 transition duration-300"
+          >
+            Kitchen
           </a>
-          <a href="/" className="hover:text-blue-500 transition duration-300">
-            New Releases
+          <a
+            href="/sports"
+            className="hover:text-blue-500 transition duration-300"
+          >
+            Sports
           </a>
           <a
             href="/clothing"

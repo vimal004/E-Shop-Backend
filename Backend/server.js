@@ -3,15 +3,15 @@ const router = require("./home");
 const userrouter = require("./userroutes");
 const cors = require("cors");
 const mongoose = require("mongoose");
+//mongodb+srv://2004vimal:zaq1%40wsx@cluster0.6tktuqx.mongodb.net/
 mongoose
-  .connect("mongodb+srv://2004vimal:zaq1%40wsx@cluster0.6tktuqx.mongodb.net/")
+  .connect("mongodb+srv://2004vimal:zaq1%40wsx@cluster0.kfsrfxi.mongodb.net/")
   .then(() => {
     console.log("Mongo DB connected!");
   })
   .catch(() => {
     console.log("Error");
   });
-
 const app = express();
 app.use(express.json());
 app.use(cors());
