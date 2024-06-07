@@ -13,7 +13,7 @@ export default {
         },
       },
       animation: {
-        shimmer: 'shimmer 1.5s infinite linear',
+        shimmer: 'shimmer 1.0s infinite linear',
       },
     },
   },
