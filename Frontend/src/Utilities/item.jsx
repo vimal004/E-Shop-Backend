@@ -32,7 +32,9 @@ const Item = () => {
       });
   };
 
-  Exists();
+  useEffect(() => {
+    Exists();
+  }, []);
 
   const handleAddToCart = () => {
     axios
@@ -46,19 +48,21 @@ const Item = () => {
   };
 
   const handleDeleteCart = () => {
-    try {
-      axios
-        .delete("http://localhost:3000/api/users/deletecart", {
-          email: mail,
+    axios
+      .delete("http://localhost:3000/api/users/deletecart", {
+        data: {
+          email: data.email,
           product_name: data.product_name,
-        })
-        .then((res) => {
-          console.log(res);
-          setcart(false);
-        });
-    } catch {
-      console.log("error");
-    }
+        },
+      })
+      .then((res) => {
+        console.log(data.email);
+        console.log(data.product_name);
+        setcart(false);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleBuyNow = () => {
@@ -110,6 +114,7 @@ const Item = () => {
               }`}
               onClick={() => {
                 cart ? handleDeleteCart() : handleAddToCart();
+                console.log(cart);
               }}
             >
               {cart ? "Delete from Cart" : "Add to Cart"}

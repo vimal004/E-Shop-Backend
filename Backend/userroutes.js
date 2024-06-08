@@ -122,6 +122,7 @@ userrouter.post("/itemexists", async (req, res) => {
 
 userrouter.delete("/deletecart", async (req, res) => {
   try {
+    const { email, product_name } = req.body;
     const response = await Item.deleteOne(req.body);
     res.send(response);
   } catch (error) {
