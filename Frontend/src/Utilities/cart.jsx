@@ -88,10 +88,6 @@ const Cart = () => {
             shimmer ? "opacity-100" : "opacity-0"
           }`}
         >
-          <ShimmerCard />
-          <ShimmerCard />
-          <ShimmerCard />
-          <ShimmerCard />
         </div>
         <div
           className={`transition-opacity duration-500 ${
