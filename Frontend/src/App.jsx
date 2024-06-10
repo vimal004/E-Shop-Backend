@@ -11,6 +11,7 @@ import CustomerService from "./Utilities/cs.jsx";
 import Footer from "./footer.jsx";
 import Sports from "./Utilities/sports.jsx";
 import Kitchen from "./Utilities/kitchen.jsx";
+import Checkout from "./Utilities/checkout.jsx";
 
 export const Context = React.createContext();
 
@@ -162,6 +163,10 @@ const appRouter = createBrowserRouter([
       {
         path: "customerservice",
         element: <CustomerService />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },

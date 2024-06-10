@@ -2,9 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Card from "./card1";
 import { Context } from "../App";
-import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
-import SearchBody from "./searchbdy";
+import Button from "./button";
 
 const Cart = () => {
   const [shimmer, setShimmer] = useState(true);
@@ -59,7 +58,9 @@ const Cart = () => {
       }`}
     >
       <div className="flex justify-between items-center px-4 mt-7 mb-4">
-        <div className="flex-1 text-center">
+        <div className="flex-1 flex justify-center items-center">
+          {" "}
+          {/* Centering container */}
           <h1
             className={`text-3xl font-bold ${
               currmode ? "text-white" : "text-black"
@@ -68,12 +69,21 @@ const Cart = () => {
             Cart Items
           </h1>
         </div>
-        <button
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-4"
-          onClick={handledelete}
-        >
-          Clear Cart
-        </button>
+        <div className="flex space-x-4">
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            onClick={handledelete}
+          >
+            Clear Cart
+          </button>
+          <Link to={"http://localhost:5173/checkout"}>
+            <Button
+              name={"Proceed to checkout"}
+              mode={currmode}
+              altname={"Proceed to checkout"}
+            />
+          </Link>
+        </div>
       </div>
       <div className="flex-grow flex flex-wrap justify-center items-center gap-6 p-2 relative">
         {data.length === 0 && (
@@ -87,8 +97,7 @@ const Cart = () => {
           className={`absolute inset-x-0 top-6 flex flex-wrap justify-center items-center gap-6 p-2 transition-opacity duration-500 ${
             shimmer ? "opacity-100" : "opacity-0"
           }`}
-        >
-        </div>
+        ></div>
         <div
           className={`transition-opacity duration-500 ${
             shimmer ? "opacity-0" : "opacity-100"
