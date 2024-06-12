@@ -63,9 +63,13 @@ const Checkout = () => {
   }, [email]);
 
   const calculateTotal = () => {
-    return data
-      .reduce((total, item) => total + item.price * (item.qty || 1), 0)
-      .toFixed(2);
+    if (data.length === 0) return "0.00"; // Return 0 if there are no items in the cart
+    const totalPrice = data.reduce((total, item) => {
+      // Remove the currency symbol and any non-numeric characters from the price
+      const price = parseFloat(item.price.replace(/[^0-9.]/g, ""));
+      return isNaN(price) ? total : total + price; // Add price to total if it's a valid number
+    }, 0);
+    return totalPrice.toFixed(2); // Return total price rounded to 2 decimal places
   };
 
   return (
@@ -150,12 +154,12 @@ const Checkout = () => {
                 <span>
                   {item.product_name} (x{item.qty || 1})
                 </span>
-                <span>₹{(item.price * (item.qty || 1)).toFixed(2)}</span>
+                <span>{item.price}</span>
               </li>
             ))}
           </ul>
           <h3 className="text-xl font-bold">Total Cost</h3>
-          <p className="text-xl">₹ {calculateTotal()}</p>
+          <p className="text-xl"> {`$`+ calculateTotal()}</p>
         </div>
       </div>
     </div>
