@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Card = ({ name, imageLink, rating, price, mode }) => {
+const Card = ({ name, imageLink, rating, price, mode, qty }) => {
   return (
     <div
       className={`w-72 h-96 rounded-lg overflow-hidden shadow-lg border border-gray-300 transform transition-transform duration-300 hover:scale-105 ${
@@ -23,6 +23,7 @@ const Card = ({ name, imageLink, rating, price, mode }) => {
         <p className={`text-base ${mode ? "text-gray-300" : "text-gray-700"}`}>
           Price: {price}
         </p>
+        
       </div>
       <div
         className={`bg-gradient-to-t ${

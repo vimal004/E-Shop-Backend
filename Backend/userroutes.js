@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
     required: [true, "Password is required"],
     minlength: [6, "Password must be at least 6 characters long"],
   },
+  address: {
+    type: String,
+    minlength: [6, "Address must be at least 6 characters long"],
+  },
 });
 
 const itemSchema = new mongoose.Schema({
@@ -138,6 +142,22 @@ userrouter.delete("/deleteall", async (req, res) => {
     res.send(response);
   } catch (error) {
     res.send({ error: "Failed to delete all items", details: error.message });
+  }
+});
+
+userrouter.put("/address", async (req, res) => {
+  try {
+    const response = await User.findOneAndUpdate(
+      { email: req.body.email },
+      {
+        address: req.body.address,
+      }
+    );
+    console.log("Address Updated");
+    res.send("Address Updated");
+  } catch (error) {
+    console.log("Error posting addresss");
+    res.send("error");
   }
 });
 
