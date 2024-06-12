@@ -66,7 +66,7 @@ const Checkout = () => {
     if (data.length === 0) return "0.00"; // Return 0 if there are no items in the cart
     const totalPrice = data.reduce((total, item) => {
       // Remove the currency symbol and any non-numeric characters from the price
-      const price = parseFloat(item.price.replace(/[^0-9.]/g, ""));
+      const price = parseFloat(item.price.replace(/[^0-9.]/g, "")) * item.qty;
       return isNaN(price) ? total : total + price; // Add price to total if it's a valid number
     }, 0);
     return totalPrice.toFixed(2); // Return total price rounded to 2 decimal places
