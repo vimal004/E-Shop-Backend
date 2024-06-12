@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import mergedData from "./data";
 import { Context } from "../App";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Item = () => {
   const { id } = useParams();
@@ -76,11 +77,6 @@ const Item = () => {
       });
   };
 
-  const handleBuyNow = () => {
-    // Buy now logic
-    alert(`Proceeding to buy ${data.product_name}!`);
-  };
-
   return (
     <div
       className={`p-6 ${
@@ -130,14 +126,16 @@ const Item = () => {
             >
               {cart ? "Delete from Cart" : "Add to Cart"}
             </button>
-            <button
-              className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition ${
-                currmode ? "hover:bg-green-600" : "hover:bg-green-700"
-              }`}
-              onClick={handleBuyNow}
-            >
-              Buy Now
-            </button>
+            <Link to={"http://localhost:5173/checkout"}>
+              <button
+                className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition ${
+                  currmode ? "hover:bg-green-600" : "hover:bg-green-700"
+                }`}
+                onClick={handleAddToCart}
+              >
+                Buy Now
+              </button>
+            </Link>
             <div
               className={`flex items-center ${
                 currmode ? "text-white" : "text-black"
