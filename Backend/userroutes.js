@@ -161,4 +161,10 @@ userrouter.put("/address", async (req, res) => {
   }
 });
 
+userrouter.post("/address", async (req, res) => {
+  const resp = await User.findOne(req.body);
+  const response = resp.address;
+  res.send(response);
+});
+
 module.exports = userrouter;

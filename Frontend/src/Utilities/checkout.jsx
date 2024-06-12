@@ -13,6 +13,19 @@ const Checkout = () => {
   const [shimmer, setShimmer] = useState(true);
 
   useEffect(() => {
+    axios
+      .post("http://localhost:3000/api/users/address", {
+        email: localStorage.getItem("email"),
+      })
+      .then((res) => {
+        setAddress(res.data);
+      })
+      .catch((err) => {
+        console.log("error");
+      });
+  }, [email]);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setShimmer(false);
     }, 1500);
@@ -85,7 +98,9 @@ const Checkout = () => {
           <input
             type="text"
             className="p-4 w-full h-20 mb-4 text-black rounded-lg text-xl border border-gray-300"
-            placeholder="Enter your delivery address"
+            placeholder={
+              address === "" ? "Enter your delivery address" : address
+            }
             onChange={(e) => setAddress(e.target.value)}
           />
           <Button
@@ -105,7 +120,10 @@ const Checkout = () => {
             </>
           ) : (
             data.map((d, index) => (
-              <Link to={`http://localhost:5173/cart/${d.product_name}`}>
+              <Link
+                to={`http://localhost:5173/cart/${d.product_name}`}
+                key={d.product_name}
+              >
                 <Card
                   key={index}
                   name={d.product_name}
