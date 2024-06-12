@@ -69,7 +69,9 @@ const Cart = () => {
             Cart Items
           </h1>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 m-5">
+          {" "}
+          {/* Added mt-20 for 5cm margin */}
           <button
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
             onClick={handledelete}
@@ -85,6 +87,7 @@ const Cart = () => {
           </Link>
         </div>
       </div>
+
       <div className="flex-grow flex flex-wrap justify-center items-center gap-6 p-2 relative">
         {data.length === 0 && (
           <div className="text-center text-2xl font-bold mb-4">

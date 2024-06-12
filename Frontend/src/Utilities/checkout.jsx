@@ -95,12 +95,12 @@ const Checkout = () => {
           onSubmit={handleSubmit}
           className="w-full max-w-lg flex flex-col items-center"
         >
-          <input
-            type="text"
-            className="p-4 w-full h-20 mb-4 text-black rounded-lg text-xl border border-gray-300"
+          <textarea
+            className="p-4 w-full h-32 mb-4 text-black rounded-lg text-xl border border-gray-300 resize-none"
             placeholder={
               address === "" ? "Enter your delivery address" : address
             }
+            value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
           <Button
