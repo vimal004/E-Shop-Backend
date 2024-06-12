@@ -4,6 +4,7 @@ import { Context } from "../App";
 import Card from "./card1";
 import ShimmerCard from "./shimmercard"; // Make sure to import ShimmerCard
 import Button from "./button"; // Import the custom Button component
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const { currmode, email } = useContext(Context);
@@ -104,15 +105,17 @@ const Checkout = () => {
             </>
           ) : (
             data.map((d, index) => (
-              <Card
-                key={index}
-                name={d.product_name}
-                rating={d.rating}
-                price={d.price}
-                imageLink={d.image_link}
-                qty={d.qty}
-                mode={currmode} // Assuming qty is provided in the data
-              />
+              <Link to={`http://localhost:5173/cart/${d.product_name}`}>
+                <Card
+                  key={index}
+                  name={d.product_name}
+                  rating={d.rating}
+                  price={d.price}
+                  imageLink={d.image_link}
+                  qty={d.qty}
+                  mode={currmode} // Assuming qty is provided in the data
+                />
+              </Link>
             ))
           )}
         </div>
