@@ -56,6 +56,9 @@ const itemSchema = new mongoose.Schema({
       message: (props) => `${props.value} is not a valid email address!`,
     },
   },
+  qty: {
+    type: Number,
+  },
 });
 
 const Item = mongoose.model("Item", itemSchema);
@@ -165,6 +168,16 @@ userrouter.post("/address", async (req, res) => {
   const resp = await User.findOne(req.body);
   const response = resp.address;
   res.send(response);
+});
+
+userrouter.put("/qty", async (req, res) => {
+  const data = await Item.findOneAndUpdate(
+    { product_name: req.body.product_name, email: req.body.email },
+    {
+      qty: req.body.qty,
+    }
+  );
+  res.send(data);
 });
 
 module.exports = userrouter;

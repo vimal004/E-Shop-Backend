@@ -11,6 +11,17 @@ const Item = () => {
   data.email = localStorage.getItem("email");
   const [cart, setcart] = useState(false);
 
+  const handleQtyChange = (event) => {
+    const newQty = event.target.value;
+    console.log(`Quantity of ${data.product_name} changed to ${newQty}`);
+    data.qty = parseInt(newQty);
+    axios.put("http://localhost:3000/api/users/qty", {
+      email: data.email,
+      product_name: data.product_name,
+      qty: data.qty,
+    });
+  };
+
   // Mock data for stock status and reviews
   const [inStock] = useState(true);
   const [reviews] = useState([
@@ -107,7 +118,7 @@ const Item = () => {
               <span className="text-red-500">Out of Stock</span>
             )}
           </div>
-          <div className="flex gap-4 mb-6">
+          <div className="flex gap-4 mb-6 items-center">
             <button
               className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition ${
                 currmode ? "hover:bg-blue-600" : "hover:bg-blue-700"
@@ -127,6 +138,28 @@ const Item = () => {
             >
               Buy Now
             </button>
+            <div
+              className={`flex items-center ${
+                currmode ? "text-white" : "text-black"
+              }`}
+            >
+              <label className="mr-2">Quantity:</label>
+              <select
+                className={`bg-${
+                  currmode ? "gray-800" : "white"
+                } border border-${currmode ? "gray-600" : "gray-300"} text-${
+                  currmode ? "white" : "black"
+                } rounded`}
+                defaultValue={data.qty || 1}
+                onChange={handleQtyChange}
+              >
+                {[...Array(10).keys()].map((i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
       </div>

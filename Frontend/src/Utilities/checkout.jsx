@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { Context } from "../App";
-import Card from "./card1";
+import Card from "./card2";
 import ShimmerCard from "./shimmercard"; // Make sure to import ShimmerCard
 import Button from "./button"; // Import the custom Button component
 import { Link } from "react-router-dom";
@@ -11,6 +11,8 @@ const Checkout = () => {
   const [data, setData] = useState([]);
   const [address, setAddress] = useState("");
   const [shimmer, setShimmer] = useState(true);
+
+  
 
   useEffect(() => {
     axios
@@ -124,10 +126,7 @@ const Checkout = () => {
             </>
           ) : (
             data.map((d, index) => (
-              <Link
-                to={`http://localhost:5173/cart/${d.product_name}`}
-                key={d.product_name}
-              >
+              
                 <Card
                   key={index}
                   name={d.product_name}
@@ -137,7 +136,6 @@ const Checkout = () => {
                   qty={d.qty}
                   mode={currmode} // Assuming qty is provided in the data
                 />
-              </Link>
             ))
           )}
         </div>
@@ -159,7 +157,7 @@ const Checkout = () => {
             ))}
           </ul>
           <h3 className="text-xl font-bold">Total Cost</h3>
-          <p className="text-xl"> {`$`+ calculateTotal()}</p>
+          <p className="text-xl"> {`$` + calculateTotal()}</p>
         </div>
       </div>
     </div>
