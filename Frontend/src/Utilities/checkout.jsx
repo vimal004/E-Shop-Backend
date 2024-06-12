@@ -12,8 +12,6 @@ const Checkout = () => {
   const [address, setAddress] = useState("");
   const [shimmer, setShimmer] = useState(true);
 
-  
-
   useEffect(() => {
     axios
       .post("http://localhost:3000/api/users/address", {
@@ -126,16 +124,15 @@ const Checkout = () => {
             </>
           ) : (
             data.map((d, index) => (
-              
-                <Card
-                  key={index}
-                  name={d.product_name}
-                  rating={d.rating}
-                  price={d.price}
-                  imageLink={d.image_link}
-                  qty={d.qty}
-                  mode={currmode} // Assuming qty is provided in the data
-                />
+              <Card
+                key={index}
+                name={d.product_name}
+                rating={d.rating}
+                price={d.price}
+                imageLink={d.image_link}
+                qty={d.qty}
+                mode={currmode} // Assuming qty is provided in the data
+              />
             ))
           )}
         </div>

@@ -19,7 +19,7 @@ const Clothing = () => {
   }, []);
 
   return search ? (
-    <SearchBody data={data}/>
+    <SearchBody data={data} />
   ) : (
     <div
       className={`min-h-screen flex flex-col ${

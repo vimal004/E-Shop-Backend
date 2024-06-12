@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 const SearchBody = ({ data }) => {
   const { text, currmode } = useContext(Context);
   const searchText = text.toLowerCase(); // Convert search text to lowercase
-  const filteredProducts = data.filter(
-    (d) => d.product_name.toLowerCase().includes(searchText)
+  const filteredProducts = data.filter((d) =>
+    d.product_name.toLowerCase().includes(searchText)
   );
 
   const hasItems = filteredProducts.length > 0;

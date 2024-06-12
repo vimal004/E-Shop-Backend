@@ -64,10 +64,6 @@ const App = () => {
 
   const [mail, setmail] = useState("");
 
-  useEffect(() => {
-    console.log(text);
-  }, [text]);
-
   const values = {
     mail,
     setmail,
