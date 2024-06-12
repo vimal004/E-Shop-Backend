@@ -23,7 +23,6 @@ const Card = ({ name, imageLink, rating, price, mode, qty }) => {
         <p className={`text-base ${mode ? "text-gray-300" : "text-gray-700"}`}>
           Price: {price}
         </p>
-        
       </div>
       <div
         className={`bg-gradient-to-t ${

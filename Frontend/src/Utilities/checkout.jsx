@@ -3,6 +3,7 @@ import axios from "axios";
 import { Context } from "../App";
 import Card from "./card1";
 import ShimmerCard from "./shimmercard"; // Make sure to import ShimmerCard
+import Button from "./button"; // Import the custom Button component
 
 const Checkout = () => {
   const { currmode, email } = useContext(Context);
@@ -47,6 +48,12 @@ const Checkout = () => {
       });
   }, [email]);
 
+  const calculateTotal = () => {
+    return data
+      .reduce((total, item) => total + item.price * (item.qty || 1), 0)
+      .toFixed(2);
+  };
+
   return (
     <div
       className={`min-h-screen flex flex-col ${
@@ -76,16 +83,16 @@ const Checkout = () => {
         >
           <input
             type="text"
-            className="p-4 w-full h-20 mb-4 text-black rounded-lg text-xl"
+            className="p-4 w-full h-20 mb-4 text-black rounded-lg text-xl border border-gray-300"
             placeholder="Enter your delivery address"
             onChange={(e) => setAddress(e.target.value)}
           />
-          <button
-            type="submit"
-            className="p-2 w-1/2 text-center bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition duration-300 text-lg"
-          >
-            Submit
-          </button>
+          <Button
+            name="Update Address"
+            altname="Update Address"
+            action={handleSubmit}
+            mode={currmode}
+          />
         </form>
         <div className="flex flex-wrap justify-center items-center gap-6 p-2 w-full">
           {shimmer ? (
@@ -103,9 +110,31 @@ const Checkout = () => {
                 rating={d.rating}
                 price={d.price}
                 imageLink={d.image_link}
+                qty={d.qty}
+                mode={currmode} // Assuming qty is provided in the data
               />
             ))
           )}
+        </div>
+        <div
+          className={`w-full max-w-lg p-4 mt-6 mb-4 rounded-lg ${
+            // Added mb-4 for margin-bottom
+            currmode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+          } shadow-lg`}
+        >
+          <h2 className="text-2xl font-bold">Order Summary</h2>
+          <ul className="text-lg mb-4">
+            {data.map((item, index) => (
+              <li key={index} className="flex justify-between py-1">
+                <span>
+                  {item.product_name} (x{item.qty || 1})
+                </span>
+                <span>₹{(item.price * (item.qty || 1)).toFixed(2)}</span>
+              </li>
+            ))}
+          </ul>
+          <h3 className="text-xl font-bold">Total Cost</h3>
+          <p className="text-xl">₹ {calculateTotal()}</p>
         </div>
       </div>
     </div>
