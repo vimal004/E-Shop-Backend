@@ -18,7 +18,7 @@ const Checkout = () => {
         email: localStorage.getItem("email"),
       })
       .then((res) => {
-        setAddress(res.data);
+        setAddress(res?.data?.address);
       })
       .catch((err) => {
         console.log("error");
