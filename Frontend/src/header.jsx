@@ -73,30 +73,26 @@ const Header = () => {
               : "flex justify-center space-x-6 text-gray-700"
           }
         >
-          <a
-            href="https://mern-project-frontend-lyart.vercel.app/kitchen"
-            className="hover:text-blue-500 transition duration-300"
-          >
-            Kitchen
-          </a>
-          <a
-            href="https://mern-project-frontend-lyart.vercel.app/sports"
-            className="hover:text-blue-500 transition duration-300"
-          >
-            Sports
-          </a>
-          <a
-            href="https://mern-project-frontend-lyart.vercel.app/clothing"
-            className="hover:text-blue-500 transition duration-300"
-          >
-            Clothing
-          </a>
-          <a
-            href="https://mern-project-frontend-lyart.vercel.app/electronics"
-            className="hover:text-blue-500 transition duration-300"
-          >
-            Electronics
-          </a>
+          <Link to={"/kitchen"}>
+            <a href="" className="hover:text-blue-500 transition duration-300">
+              Kitchen
+            </a>
+          </Link>
+          <Link to={"/sports"}>
+            <a href="" className="hover:text-blue-500 transition duration-300">
+              Sports
+            </a>
+          </Link>
+          <Link to={"/electronics"}>
+            <a href="" className="hover:text-blue-500 transition duration-300">
+              Electronics
+            </a>
+          </Link>
+          <Link to={"/clothing"}>
+            <a href="" className="hover:text-blue-500 transition duration-300">
+              Clothing
+            </a>
+          </Link>
           <a
             href="https://mern-project-frontend-lyart.vercel.app/customerservice"
             className="hover:text-blue-500 transition duration-300"
