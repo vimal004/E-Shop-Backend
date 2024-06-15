@@ -11,7 +11,6 @@ const Item = () => {
   const { currmode, mail } = useContext(Context);
   data.email = localStorage.getItem("email");
   const [cart, setcart] = useState(false);
-  //process.env.REACT_APP_API_URL +
   const handleQtyChange = (event) => {
     const newQty = event.target.value;
     console.log(`Quantity of ${data.product_name} changed to ${newQty}`);
@@ -135,7 +134,9 @@ const Item = () => {
             >
               {cart ? "Delete from Cart" : "Add to Cart"}
             </button>
-            <Link to={"http://localhost:5173/checkout"}>
+            <Link
+              to={"https://mern-project-frontend-lyart.vercel.app/checkout"}
+            >
               <button
                 className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition ${
                   currmode ? "hover:bg-green-600" : "hover:bg-green-700"

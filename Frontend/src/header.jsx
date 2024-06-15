@@ -74,31 +74,31 @@ const Header = () => {
           }
         >
           <a
-            href="/kitchen"
+            href="https://mern-project-frontend-lyart.vercel.app/kitchen"
             className="hover:text-blue-500 transition duration-300"
           >
             Kitchen
           </a>
           <a
-            href="/sports"
+            href="https://mern-project-frontend-lyart.vercel.app/sports"
             className="hover:text-blue-500 transition duration-300"
           >
             Sports
           </a>
           <a
-            href="/clothing"
+            href="https://mern-project-frontend-lyart.vercel.app/clothing"
             className="hover:text-blue-500 transition duration-300"
           >
             Clothing
           </a>
           <a
-            href="/electronics"
+            href="https://mern-project-frontend-lyart.vercel.app/electronics"
             className="hover:text-blue-500 transition duration-300"
           >
             Electronics
           </a>
           <a
-            href="/customerservice"
+            href="https://mern-project-frontend-lyart.vercel.app/customerservice"
             className="hover:text-blue-500 transition duration-300"
           >
             Customer Service
