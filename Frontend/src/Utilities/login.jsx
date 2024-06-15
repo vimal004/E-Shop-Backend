@@ -30,7 +30,10 @@ const LoginModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/users/login", { email, password })
+      .post(process.env.REACT_APP_API_URL + "/api/users/login", {
+        email,
+        password,
+      })
       .then(() => {
         logfn();
         setmail(email);

@@ -11,7 +11,7 @@ const Electronics = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/users/data")
+      .get(process.env.REACT_APP_API_URL + "/api/users/data")
       .then((res) => {
         setData(res?.data);
         setShimmer(false);

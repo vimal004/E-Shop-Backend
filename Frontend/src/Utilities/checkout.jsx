@@ -10,10 +10,10 @@ const Checkout = () => {
   const [data, setData] = useState([]);
   const [address, setAddress] = useState("");
   const [shimmer, setShimmer] = useState(true);
-
+  //process.env.REACT_APP_API_URL +
   useEffect(() => {
     axios
-      .post("http://localhost:3000/api/users/address", {
+      .post(process.env.REACT_APP_API_URL + "/api/users/address", {
         email: localStorage.getItem("email"),
       })
       .then((res) => {
@@ -29,7 +29,7 @@ const Checkout = () => {
     console.log("Submit button clicked");
 
     axios
-      .put("http://localhost:3000/api/users/address", {
+      .put(process.env.REACT_APP_API_URL + "/api/users/address", {
         email: localStorage.getItem("email"),
         address: address,
       })
@@ -43,7 +43,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3000/api/users/getcart", {
+      .post(process.env.REACT_APP_API_URL + "/api/users/getcart", {
         email: localStorage.getItem("email"),
       })
       .then((res) => {

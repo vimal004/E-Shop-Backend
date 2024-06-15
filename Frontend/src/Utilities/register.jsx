@@ -31,7 +31,10 @@ const RegisterModal = ({
     }
 
     axios
-      .post("http://localhost:3000/api/users/register", { email, password })
+      .post(process.env.REACT_APP_API_URL + "/api/users/register", {
+        email,
+        password,
+      })
       .then(() => {
         setr(!r);
         setreg(!reg);

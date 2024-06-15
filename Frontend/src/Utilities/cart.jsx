@@ -11,10 +11,12 @@ const Cart = () => {
   const email = localStorage.getItem("email");
   const [mail, setEmail] = useState("");
   const { currmode, search } = useContext(Context);
-
+  //process.env.REACT_APP_API_URL + "/api/users/data"
   const handledelete = () => {
     axios
-      .delete("http://localhost:3000/api/users/deleteall", { email: mail })
+      .delete(process.env.REACT_APP_API_URL + "/api/users/deleteall", {
+        email: mail,
+      })
       .then((res) => {
         console.log(res);
       })
@@ -27,7 +29,7 @@ const Cart = () => {
     if (email !== "") {
       setEmail(email);
       axios
-        .post("http://localhost:3000/api/users/getcart", { email })
+        .post(process.env.REACT_APP_API_URL + "/api/users/getcart", { email })
         .then((res) => {
           setData(res.data);
           setShimmer(false);

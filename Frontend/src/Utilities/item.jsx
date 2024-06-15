@@ -11,12 +11,12 @@ const Item = () => {
   const { currmode, mail } = useContext(Context);
   data.email = localStorage.getItem("email");
   const [cart, setcart] = useState(false);
-
+  //process.env.REACT_APP_API_URL +
   const handleQtyChange = (event) => {
     const newQty = event.target.value;
     console.log(`Quantity of ${data.product_name} changed to ${newQty}`);
     data.qty = parseInt(newQty);
-    axios.put("http://localhost:3000/api/users/qty", {
+    axios.put(process.env.REACT_APP_API_URL + "/api/users/qty", {
       email: data.email,
       product_name: data.product_name,
       qty: data.qty,
@@ -32,7 +32,7 @@ const Item = () => {
 
   const Exists = () => {
     axios
-      .post("http://localhost:3000/api/users/itemexists", {
+      .post(process.env.REACT_APP_API_URL + "/api/users/itemexists", {
         email: data.email,
         product_name: data.product_name,
       })
@@ -50,7 +50,7 @@ const Item = () => {
 
   const handleAddToCart = () => {
     axios
-      .post("http://localhost:3000/api/users/addcart", data)
+      .post(process.env.REACT_APP_API_URL + "/api/users/addcart", data)
       .then((res) => {
         setcart(true);
       })
@@ -61,7 +61,7 @@ const Item = () => {
 
   const handleDeleteCart = () => {
     axios
-      .delete("http://localhost:3000/api/users/deletecart", {
+      .delete(process.env.REACT_APP_API_URL + "/api/users/deletecart", {
         data: {
           email: data.email,
           product_name: data.product_name,
