@@ -93,12 +93,11 @@ const Header = () => {
               Clothing
             </a>
           </Link>
-          <a
-            href="https://mern-project-frontend-lyart.vercel.app/customerservice"
-            className="hover:text-blue-500 transition duration-300"
-          >
-            Customer Service
-          </a>
+          <Link to={"/customerservice"}>
+            <a href="" className="hover:text-blue-500 transition duration-300">
+              Customer Service
+            </a>
+          </Link>
         </div>
       </div>
 
