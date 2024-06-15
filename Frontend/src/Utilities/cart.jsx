@@ -117,7 +117,7 @@ const Cart = () => {
           {data.map((d, index) => (
             <Link
               key={index}
-              to={`http://localhost:5173/cart/${d.product_name}`}
+              to={`https://mern-project-frontend-lyart.vercel.app/cart/${d.product_name}`}
             >
               <Card
                 key={index}
