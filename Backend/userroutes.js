@@ -61,8 +61,39 @@ const itemSchema = new mongoose.Schema({
   },
 });
 
+const dataSchema = new mongoose.Schema({
+  id: { type: Number, required: true },
+  product_name: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  price: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: String,
+    required: true,
+  },
+  features: {
+    type: [String],
+    required: true,
+  },
+  image_link: {
+    type: String,
+    required: true,
+  },
+});
+
+const Data = mongoose.model("Data", dataSchema);
 const Item = mongoose.model("Item", itemSchema);
 const User = mongoose.model("User", userSchema);
+
+userrouter.post("/data", async (req, res) => {
+  const dat = await Data.create(req.body);
+  res.send(dat);
+});
 
 userrouter.post("/register", async (req, res) => {
   try {
