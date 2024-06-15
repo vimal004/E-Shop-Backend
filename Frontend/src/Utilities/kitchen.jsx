@@ -11,7 +11,7 @@ const Kitchen = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/api/users/data")
+      .get("https://mern-project-backend-green.vercel.app/api/users/data")
       .then((res) => {
         setData(res?.data);
         setShimmer(false);

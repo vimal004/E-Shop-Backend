@@ -11,7 +11,7 @@ const Clothing = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/api/users/data")
+      .get("https://mern-project-backend-green.vercel.app/api/users/data")
       .then((res) => {
         setData(res?.data);
         setShimmer(false);
@@ -30,7 +30,7 @@ const Clothing = () => {
 
   return search ? (
     <div>
-      <SearchBody data={data} category={"clothing"}/>
+      <SearchBody data={data} category={"clothing"} />
     </div>
   ) : (
     <div

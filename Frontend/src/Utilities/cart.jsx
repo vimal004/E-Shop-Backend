@@ -14,9 +14,12 @@ const Cart = () => {
   //process.env.REACT_APP_API_URL + "/api/users/data"
   const handledelete = () => {
     axios
-      .delete(process.env.REACT_APP_API_URL + "/api/users/deleteall", {
-        email: mail,
-      })
+      .delete(
+        "https://mern-project-backend-green.vercel.app/api/users/deleteall",
+        {
+          email: mail,
+        }
+      )
       .then((res) => {
         console.log(res);
       })
@@ -29,7 +32,10 @@ const Cart = () => {
     if (email !== "") {
       setEmail(email);
       axios
-        .post(process.env.REACT_APP_API_URL + "/api/users/getcart", { email })
+        .post(
+          "https://mern-project-backend-green.vercel.app/api/users/getcart",
+          { email }
+        )
         .then((res) => {
           setData(res.data);
           setShimmer(false);

@@ -13,7 +13,7 @@ const Checkout = () => {
   //process.env.REACT_APP_API_URL +
   useEffect(() => {
     axios
-      .post(process.env.REACT_APP_API_URL + "/api/users/address", {
+      .post("https://mern-project-backend-green.vercel.app/api/users/address", {
         email: localStorage.getItem("email"),
       })
       .then((res) => {
@@ -29,7 +29,7 @@ const Checkout = () => {
     console.log("Submit button clicked");
 
     axios
-      .put(process.env.REACT_APP_API_URL + "/api/users/address", {
+      .put("https://mern-project-backend-green.vercel.app/api/users/address", {
         email: localStorage.getItem("email"),
         address: address,
       })
@@ -43,7 +43,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .post(process.env.REACT_APP_API_URL + "/api/users/getcart", {
+      .post("https://mern-project-backend-green.vercel.app/api/users/getcart", {
         email: localStorage.getItem("email"),
       })
       .then((res) => {

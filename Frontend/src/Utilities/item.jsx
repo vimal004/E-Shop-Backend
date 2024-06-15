@@ -16,7 +16,7 @@ const Item = () => {
     const newQty = event.target.value;
     console.log(`Quantity of ${data.product_name} changed to ${newQty}`);
     data.qty = parseInt(newQty);
-    axios.put(process.env.REACT_APP_API_URL + "/api/users/qty", {
+    axios.put("https://mern-project-backend-green.vercel.app/api/users/qty", {
       email: data.email,
       product_name: data.product_name,
       qty: data.qty,
@@ -32,10 +32,13 @@ const Item = () => {
 
   const Exists = () => {
     axios
-      .post(process.env.REACT_APP_API_URL + "/api/users/itemexists", {
-        email: data.email,
-        product_name: data.product_name,
-      })
+      .post(
+        "https://mern-project-backend-green.vercel.app/api/users/itemexists",
+        {
+          email: data.email,
+          product_name: data.product_name,
+        }
+      )
       .then((res) => {
         setcart(true);
       })
@@ -50,7 +53,10 @@ const Item = () => {
 
   const handleAddToCart = () => {
     axios
-      .post(process.env.REACT_APP_API_URL + "/api/users/addcart", data)
+      .post(
+        "https://mern-project-backend-green.vercel.app/api/users/addcart",
+        data
+      )
       .then((res) => {
         setcart(true);
       })
@@ -61,12 +67,15 @@ const Item = () => {
 
   const handleDeleteCart = () => {
     axios
-      .delete(process.env.REACT_APP_API_URL + "/api/users/deletecart", {
-        data: {
-          email: data.email,
-          product_name: data.product_name,
-        },
-      })
+      .delete(
+        "https://mern-project-backend-green.vercel.app/api/users/deletecart",
+        {
+          data: {
+            email: data.email,
+            product_name: data.product_name,
+          },
+        }
+      )
       .then((res) => {
         console.log(data.email);
         console.log(data.product_name);

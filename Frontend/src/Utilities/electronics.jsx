@@ -11,7 +11,7 @@ const Electronics = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/api/users/data")
+      .get("https://mern-project-backend-green.vercel.app/api/users/data")
       .then((res) => {
         setData(res?.data);
         setShimmer(false);
@@ -30,7 +30,7 @@ const Electronics = () => {
 
   return search ? (
     <div>
-      <SearchBody data={data} category={"electronics"}/>
+      <SearchBody data={data} category={"electronics"} />
     </div>
   ) : (
     <div
