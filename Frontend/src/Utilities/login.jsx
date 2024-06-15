@@ -30,7 +30,7 @@ const LoginModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(process.env.REACT_APP_API_URL + "/api/users/login", {
+      .post("https://mern-project-backend-green.vercel.app/api/users/login", {
         email,
         password,
       })

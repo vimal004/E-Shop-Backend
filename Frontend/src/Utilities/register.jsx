@@ -31,10 +31,13 @@ const RegisterModal = ({
     }
 
     axios
-      .post(process.env.REACT_APP_API_URL + "/api/users/register", {
-        email,
-        password,
-      })
+      .post(
+        "https://mern-project-backend-green.vercel.app/api/users/register",
+        {
+          email,
+          password,
+        }
+      )
       .then(() => {
         setr(!r);
         setreg(!reg);
