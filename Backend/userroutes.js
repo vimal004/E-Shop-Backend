@@ -95,6 +95,11 @@ userrouter.post("/data", async (req, res) => {
   res.send(dat);
 });
 
+userrouter.get("/data", async (req, res) => {
+  const dat = await Data.find();
+  res.send(dat);
+});
+
 userrouter.post("/register", async (req, res) => {
   try {
     const newUser = new User(req.body);
