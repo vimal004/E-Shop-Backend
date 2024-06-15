@@ -30,7 +30,7 @@ const Electronics = () => {
 
   return search ? (
     <div>
-      <SearchBody data={data} />
+      <SearchBody data={data} category={"electronics"}/>
     </div>
   ) : (
     <div

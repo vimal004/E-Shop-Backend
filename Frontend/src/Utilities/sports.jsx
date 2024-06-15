@@ -30,7 +30,7 @@ const Sports = () => {
 
   return search ? (
     <div>
-      <SearchBody data={data} />
+      <SearchBody data={data} category={"sports"}/>
     </div>
   ) : (
     <div

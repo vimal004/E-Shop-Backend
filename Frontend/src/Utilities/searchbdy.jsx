@@ -3,11 +3,13 @@ import { Context } from "../App";
 import Card from "./card1";
 import { Link } from "react-router-dom";
 
-const SearchBody = ({ data }) => {
+const SearchBody = ({ data, category }) => {
   const { text, currmode } = useContext(Context);
   const searchText = text.toLowerCase(); // Convert search text to lowercase
-  const filteredProducts = data.filter((d) =>
-    d.product_name.toLowerCase().includes(searchText)
+  const filteredProducts = data.filter(
+    (d) =>
+      d.category === category &&
+      d.product_name.toLowerCase().includes(searchText)
   );
 
   const hasItems = filteredProducts.length > 0;

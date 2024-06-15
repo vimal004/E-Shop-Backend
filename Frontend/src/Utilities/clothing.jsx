@@ -30,7 +30,7 @@ const Clothing = () => {
 
   return search ? (
     <div>
-      <SearchBody data={data} />
+      <SearchBody data={data} category={"clothing"}/>
     </div>
   ) : (
     <div

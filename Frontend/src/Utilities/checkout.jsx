@@ -4,7 +4,6 @@ import { Context } from "../App";
 import Card from "./card2";
 import ShimmerCard from "./shimmercard"; // Make sure to import ShimmerCard
 import Button from "./button"; // Import the custom Button component
-import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const { currmode, email } = useContext(Context);
@@ -24,13 +23,6 @@ const Checkout = () => {
         console.log("error");
       });
   }, [email]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShimmer(false);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,6 +48,7 @@ const Checkout = () => {
       })
       .then((res) => {
         setData(res.data);
+        setShimmer(false);
       })
       .catch((error) => {
         console.log(error);
