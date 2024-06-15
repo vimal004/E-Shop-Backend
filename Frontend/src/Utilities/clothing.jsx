@@ -4,22 +4,34 @@ import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
 import { Context } from "../App";
 import SearchBody from "./searchbdy";
-import mergedData from "./data";
+import axios from "axios";
 
 const Clothing = () => {
-  const [shimmer, setShimmer] = useState(true);
-  const data = mergedData.filter((d) => d.id > 10 && d.id < 21);
-  const { currmode, search } = useContext(Context);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShimmer(false);
-    }, 1500);
-    return () => clearTimeout(timer);
+    axios
+      .get("http://localhost:3000/api/users/data")
+      .then((res) => {
+        setData(res?.data);
+        setShimmer(false);
+      })
+      .catch(() => {
+        console.log("error fetching data");
+      });
   }, []);
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  const [shimmer, setShimmer] = useState(true);
+  const { currmode, search } = useContext(Context);
+
   return search ? (
-    <SearchBody data={data} />
+    <div>
+      <SearchBody data={data} />
+    </div>
   ) : (
     <div
       className={`min-h-screen flex flex-col ${
@@ -49,18 +61,21 @@ const Clothing = () => {
             shimmer ? "opacity-0" : "opacity-100"
           } flex flex-wrap justify-center items-center gap-6 p-2`}
         >
-          {data.map((d) => (
-            <Link to={d.product_name} key={d.product_name}>
-              <Card
-                key={d.product_name}
-                name={d.product_name}
-                rating={d.rating}
-                price={d.price}
-                imageLink={d.image_link}
-                mode={currmode}
-              />
-            </Link>
-          ))}
+          {data.map(
+            (d) =>
+              d.category === "clothing" && (
+                <Link to={d.product_name} key={d.id}>
+                  <Card
+                    key={d.product_name}
+                    name={d.product_name}
+                    rating={d.rating}
+                    price={d.price}
+                    imageLink={d.image_link}
+                    mode={currmode}
+                  />
+                </Link>
+              )
+          )}
         </div>
       </div>
     </div>

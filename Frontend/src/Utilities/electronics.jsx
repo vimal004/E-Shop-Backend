@@ -2,19 +2,19 @@ import React, { useState, useEffect, useContext } from "react";
 import Card from "./card1";
 import { Context } from "../App";
 import ShimmerCard from "./shimmercard";
-import { Link, useFetcher } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SearchBody from "./searchbdy";
-import mergedData from "./data";
 import axios from "axios";
 
 const Electronics = () => {
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/users/data")
       .then((res) => {
         setData(res?.data);
+        setShimmer(false);
       })
       .catch(() => {
         console.log("error fetching data");
@@ -27,13 +27,6 @@ const Electronics = () => {
 
   const [shimmer, setShimmer] = useState(true);
   const { currmode, search } = useContext(Context);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShimmer(false);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
 
   return search ? (
     <div>
@@ -70,7 +63,7 @@ const Electronics = () => {
         >
           {data.map(
             (d) =>
-              d.id < 11 && (
+              d.category === "electronics" && (
                 <Link to={d.product_name} key={d.id}>
                   <Card
                     key={d.product_name}
