@@ -3,14 +3,20 @@ const router = require("./home");
 const userrouter = require("./userroutes");
 const cors = require("cors");
 const mongoose = require("mongoose");
+
+const mongoUri =
+  process.env.MONGODB_URI ||
+  "mongodb+srv://2004vimal:zaq1%40wsx@cluster0.kfsrfxi.mongodb.net/";
+
 mongoose
-  .connect("mongodb+srv://2004vimal:zaq1%40wsx@cluster0.kfsrfxi.mongodb.net/")
+  .connect(mongoUri)
   .then(() => {
     console.log("Mongo DB connected!");
   })
-  .catch(() => {
-    console.log("Error");
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
   });
+
 const app = express();
 app.use(express.json());
 app.use(cors());
