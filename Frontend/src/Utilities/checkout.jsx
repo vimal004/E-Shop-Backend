@@ -60,7 +60,7 @@ const Checkout = () => {
     const totalPrice = data.reduce((total, item) => {
       // Remove the currency symbol and any non-numeric characters from the price
       const price =
-        parseFloat(item.price.replace(/[^0-9.]/g, "")) * item.qty || 1;
+        parseFloat(item.price.replace(/[^0-9.]/g, "")) * (item.qty || 1);
       return isNaN(price) ? total : total + price; // Add price to total if it's a valid number
     }, 0);
     return totalPrice.toFixed(2); // Return total price rounded to 2 decimal places
