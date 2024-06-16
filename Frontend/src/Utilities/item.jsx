@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Context } from "../App";
 
 const Item = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { currmode, mail } = useContext(Context);
   const [data, setData] = useState(null);
@@ -160,18 +161,17 @@ const Item = () => {
             >
               {cart ? "Delete from Cart" : "Add to Cart"}
             </button>
-            <Link
-              to={"https://mern-project-frontend-lyart.vercel.app/checkout"}
+            <button
+              className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition ${
+                currmode ? "hover:bg-green-600" : "hover:bg-green-700"
+              }`}
+              onClick={() => {
+                handleAddToCart();
+                navigate("/checkout");
+              }}
             >
-              <button
-                className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition ${
-                  currmode ? "hover:bg-green-600" : "hover:bg-green-700"
-                }`}
-                onClick={handleAddToCart}
-              >
-                Buy Now
-              </button>
-            </Link>
+              Buy Now
+            </button>
             <div
               className={`flex items-center ${
                 currmode ? "text-white" : "text-black"
