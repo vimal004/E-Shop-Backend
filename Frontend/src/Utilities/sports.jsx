@@ -21,10 +21,6 @@ const Sports = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const [shimmer, setShimmer] = useState(true);
   const { currmode, search } = useContext(Context);
 
