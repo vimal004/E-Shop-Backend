@@ -12,7 +12,7 @@ const Cart = () => {
   const [mail, setEmail] = useState("");
   const { currmode, search } = useContext(Context);
   const navigate = useNavigate(); // Define the navigate function here
-  
+
   const handledelete = () => {
     axios
       .delete(
@@ -48,7 +48,7 @@ const Cart = () => {
       console.log("no email");
       setEmail("");
     }
-  }, [email, data]);
+  }, [email]);
 
   return mail === "" ? (
     <div
