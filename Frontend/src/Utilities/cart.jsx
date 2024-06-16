@@ -11,7 +11,8 @@ const Cart = () => {
   const email = localStorage.getItem("email");
   const [mail, setEmail] = useState("");
   const { currmode, search } = useContext(Context);
-  //process.env.REACT_APP_API_URL + "/api/users/data"
+  const navigate = useNavigate(); // Define the navigate function here
+  
   const handledelete = () => {
     axios
       .delete(
