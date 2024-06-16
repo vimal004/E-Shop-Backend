@@ -1,12 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import Button from "./Utilities/button";
-import "./index.css"; // Remove this line if not using custom styles
 import Profile from "./Utilities/profile";
 import { Context } from "./App";
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import "./index.css"; // Remove this line if not using custom styles
 
 const Header = () => {
   const {
@@ -35,16 +32,14 @@ const Header = () => {
   const [lgn, setlgn] = useState("Login");
 
   const lgtoggle = () => {
-    lgn === "Login" ? setlgn("Logout") : setlgn("Login");
+    setlgn(lgn === "Login" ? "Logout" : "Login");
   };
 
   return (
     <div
-      className={
-        currmode
-          ? "flex justify-between items-center bg-gray-800 p-6 shadow-lg"
-          : "flex justify-between items-center bg-white p-6 shadow-lg"
-      }
+      className={`flex flex-col md:flex-row justify-between items-center p-6 shadow-lg ${
+        currmode ? "bg-gray-800" : "bg-white"
+      }`}
     >
       <Link to={"/"}>
         <div className="flex items-center space-x-4">
@@ -55,64 +50,62 @@ const Header = () => {
             alt="Logo"
           />
           <h1
-            className={
-              currmode
-                ? "text-2xl font-bold text-white"
-                : "text-2xl font-bold text-gray-800"
-            }
+            className={`text-2xl font-bold ${
+              currmode ? "text-white" : "text-gray-800"
+            }`}
           >
             E-Shop
           </h1>
         </div>
       </Link>
-      <div className="flex-grow mx-10">
+      <div className="flex-grow mt-4 md:mt-0 md:mx-10 w-full md:w-auto">
         <div
-          className={
-            currmode
-              ? "flex justify-center space-x-6 text-white"
-              : "flex justify-center space-x-6 text-gray-700"
-          }
+          className={`flex justify-center space-x-6 ${
+            currmode ? "text-white" : "text-gray-700"
+          }`}
         >
-          <Link to={"/kitchen"}>
-            <a href="" className="hover:text-blue-500 transition duration-300">
-              Kitchen
-            </a>
+          <Link
+            to={"/kitchen"}
+            className="hover:text-blue-500 transition duration-300"
+          >
+            Kitchen
           </Link>
-          <Link to={"/sports"}>
-            <a href="" className="hover:text-blue-500 transition duration-300">
-              Sports
-            </a>
+          <Link
+            to={"/sports"}
+            className="hover:text-blue-500 transition duration-300"
+          >
+            Sports
           </Link>
-          <Link to={"/electronics"}>
-            <a href="" className="hover:text-blue-500 transition duration-300">
-              Electronics
-            </a>
+          <Link
+            to={"/electronics"}
+            className="hover:text-blue-500 transition duration-300"
+          >
+            Electronics
           </Link>
-          <Link to={"/clothing"}>
-            <a href="" className="hover:text-blue-500 transition duration-300">
-              Clothing
-            </a>
+          <Link
+            to={"/clothing"}
+            className="hover:text-blue-500 transition duration-300"
+          >
+            Clothing
           </Link>
-          <Link to={"/customerservice"}>
-            <a href="" className="hover:text-blue-500 transition duration-300">
-              Customer Service
-            </a>
+          <Link
+            to={"/customerservice"}
+            className="hover:text-blue-500 transition duration-300"
+          >
+            Customer Service
           </Link>
         </div>
       </div>
-
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 mt-4 md:mt-0 w-full md:w-auto">
         <Link to={"/cart"}>
           <Button name={"Cart"} mode={currmode} altname={"Cart"} />
         </Link>
         <input
-          className="w-80 px-4 py-2 border border-gray-300 rounded-full shadow focus:outline-none
-
-          focus:border-blue-500 transition duration-300"
+          className="flex-grow md:w-80 px-4 py-2 border border-gray-300 rounded-full shadow focus:outline-none focus:border-blue-500 transition duration-300"
           placeholder="Search for products, brands and more"
           onChange={(e) => {
             settext(e.target.value);
-            e.target.value.length > 0 ? setsearch(true) : setsearch(false);
+            setsearch(e.target.value.length > 0);
           }}
         />
         <Button

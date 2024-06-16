@@ -1,16 +1,55 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
-import mergedData from "./data";
-import { Context } from "../App";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Context } from "../App";
 
 const Item = () => {
   const { id } = useParams();
-  const data = mergedData.find((d) => d.product_name === id);
   const { currmode, mail } = useContext(Context);
-  data.email = localStorage.getItem("email");
-  const [cart, setcart] = useState(false);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [cart, setCart] = useState(false);
+  const [inStock] = useState(true);
+  const [reviews] = useState([
+    { name: "Alice", rating: 5, comment: "Great product!" },
+    { name: "Bob", rating: 4, comment: "Very good, but could be improved." },
+  ]);
+
+  useEffect(() => {
+    axios
+      .get("https://mern-project-backend-green.vercel.app/api/users/data")
+      .then((res) => {
+        const itemData = res.data.find((d) => d.product_name === id);
+        if (itemData) {
+          setData({ ...itemData, email: localStorage.getItem("email") });
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        console.log("error fetching data");
+        setLoading(false);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    if (data) {
+      axios
+        .post(
+          "https://mern-project-backend-green.vercel.app/api/users/itemexists",
+          {
+            email: data.email,
+            product_name: data.product_name,
+          }
+        )
+        .then((res) => {
+          setCart(true);
+        })
+        .catch((error) => {
+          setCart(false);
+        });
+    }
+  }, [data]);
+
   const handleQtyChange = (event) => {
     const newQty = event.target.value;
     console.log(`Quantity of ${data.product_name} changed to ${newQty}`);
@@ -22,34 +61,6 @@ const Item = () => {
     });
   };
 
-  // Mock data for stock status and reviews
-  const [inStock] = useState(true);
-  const [reviews] = useState([
-    { name: "Alice", rating: 5, comment: "Great product!" },
-    { name: "Bob", rating: 4, comment: "Very good, but could be improved." },
-  ]);
-
-  const Exists = () => {
-    axios
-      .post(
-        "https://mern-project-backend-green.vercel.app/api/users/itemexists",
-        {
-          email: data.email,
-          product_name: data.product_name,
-        }
-      )
-      .then((res) => {
-        setcart(true);
-      })
-      .catch((error) => {
-        setcart(false);
-      });
-  };
-
-  useEffect(() => {
-    Exists();
-  }, []);
-
   const handleAddToCart = () => {
     axios
       .post(
@@ -57,7 +68,7 @@ const Item = () => {
         data
       )
       .then((res) => {
-        setcart(true);
+        setCart(true);
       })
       .catch((error) => {
         console.error(error);
@@ -78,12 +89,27 @@ const Item = () => {
       .then((res) => {
         console.log(data.email);
         console.log(data.product_name);
-        setcart(false);
+        setCart(false);
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  if (loading) {
+    return (
+      <div
+        className={`p-6 min-h-screen ${
+          currmode ? "bg-gray-700 text-white" : "bg-white text-black"
+        }`}
+      >
+        <div className="flex justify-center items-center h-full">
+          <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-500"></div>
+          <span className="ml-2">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -94,7 +120,7 @@ const Item = () => {
       <div className="flex flex-col md:flex-row md:justify-center md:items-center">
         <div className="md:w-1/2">
           <img
-            className="w-100 h-100 object-cover rounded mx-8"
+            className="w-70 h-70 object-cover rounded mx-8"
             src={data.image_link}
             alt={data.product_name}
           />
