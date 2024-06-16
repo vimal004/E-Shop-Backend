@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Card from "./card1";
 import { Context } from "../App";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "./button";
 
 const Cart = () => {
@@ -86,13 +86,12 @@ const Cart = () => {
           >
             Clear Cart
           </button>
-          <Link to={"http://localhost:5173/checkout"}>
-            <Button
-              name={"Proceed to checkout"}
-              mode={currmode}
-              altname={"Proceed to checkout"}
-            />
-          </Link>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            onClick={() => navigate("/checkout")}
+          >
+            Proceed to checkout
+          </button>
         </div>
       </div>
 
