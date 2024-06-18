@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../App";
-import { useContext } from "react";
+import profileImage from "../assets/pfp.jfif"; // Adjust the path based on your file structure
 
 const Profile = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { mail, setmail, log, setlog } = useContext(Context);
+
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
@@ -20,8 +21,8 @@ const Profile = () => {
   return (
     <div className="relative">
       <img
-        className="rounded-full w-10 h-10 border-1 border-gray-300 cursor-pointer"
-        src="https://png.pngitem.com/pimgs/s/80-802775_transparent-background-user-png-png-download.png"
+        className="rounded-full w-10 h-10 cursor-pointer"
+        src={profileImage}
         alt="Profile"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Outlet, createBrowserRouter, useFetcher } from "react-router-dom";
 import About from "./Utilities/about";
 import Header from "./header";
-import Body from "./body"; // Assuming you have a Body component in this path
-import Clothing from "./Utilities/clothing";
-import Electronics from "./Utilities/electronics";
+import Body from "./body";
 import Cart from "./Utilities/cart.jsx";
 import Item from "./Utilities/item.jsx";
 import CustomerService from "./Utilities/cs.jsx";
 import Footer from "./footer.jsx";
-import Sports from "./Utilities/sports.jsx";
-import Kitchen from "./Utilities/kitchen.jsx";
 import Checkout from "./Utilities/checkout.jsx";
+import Product from "./Utilities/product.jsx";
 
 export const Context = React.createContext();
 
@@ -118,19 +115,19 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "clothing",
-        element: <Clothing />,
+        element: <Product product={"clothing"} />,
       },
       {
         path: "electronics",
-        element: <Electronics />,
+        element: <Product product={"electronics"} />,
       },
       {
         path: "sports",
-        element: <Sports />,
+        element: <Product product={"sports"} />,
       },
       {
         path: "kitchen",
-        element: <Kitchen />,
+        element: <Product product={"kitchen"} />,
       },
       {
         path: "cart",

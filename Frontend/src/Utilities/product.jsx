@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import Card from "./card1";
-import { Context } from "../App";
 import ShimmerCard from "./shimmercard";
 import { Link } from "react-router-dom";
+import { Context } from "../App";
 import SearchBody from "./searchbdy";
 import axios from "axios";
 
-const Kitchen = () => {
+const Product = ({ product }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Kitchen = () => {
 
   return search ? (
     <div>
-      <SearchBody data={data} />
+      <SearchBody data={data} category={product} />
     </div>
   ) : (
     <div
@@ -39,8 +39,9 @@ const Kitchen = () => {
           currmode ? "text-white" : "text-black"
         }`}
       >
-        Kitchen
+        {product.charAt(0).toUpperCase() + product.slice(1).toLowerCase()}
       </h1>
+
       <div className="flex-grow flex flex-wrap justify-center items-center gap-6 p-2 relative">
         <div
           className={`absolute inset-x-0 top-6 flex flex-wrap justify-center items-center gap-6 p-2 transition-opacity duration-500 ${
@@ -59,7 +60,7 @@ const Kitchen = () => {
         >
           {data.map(
             (d) =>
-              d.category === "kitchen" && (
+              d.category === product && (
                 <Link to={d.product_name} key={d.id}>
                   <Card
                     key={d.product_name}
@@ -78,4 +79,4 @@ const Kitchen = () => {
   );
 };
 
-export default Kitchen;
+export default Product;
