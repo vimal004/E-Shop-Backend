@@ -8,7 +8,7 @@ import Button from "./button"; // Import the custom Button component
 const Checkout = () => {
   const { currmode, email } = useContext(Context);
   const [data, setData] = useState([]);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(null);
   const [shimmer, setShimmer] = useState(true);
   //process.env.REACT_APP_API_URL +
   useEffect(() => {
@@ -95,9 +95,7 @@ const Checkout = () => {
         >
           <textarea
             className="p-4 w-full h-32 mb-4 text-black rounded-lg text-xl border border-gray-300 resize-none"
-            placeholder={
-              address === "" ? "Enter your delivery address" : address
-            }
+            placeholder={"Enter your delivery address"}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
