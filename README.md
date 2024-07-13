@@ -1,1 +1,1 @@
-A Full Stack MERN E-Commerce Website Project
+Backend of my E Commerce Website E Shop
