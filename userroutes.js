@@ -1,8 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const validator = require("validator");
+const NodeCache = require("node-cache");
 const userrouter = express.Router();
 userrouter.use(express.json());
+
+// Initialize cache
+const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -90,12 +94,28 @@ const Data = mongoose.model("Data", dataSchema);
 const Item = mongoose.model("Item", itemSchema);
 const User = mongoose.model("User", userSchema);
 
+// Caching middleware
+const cacheMiddleware = (req, res, next) => {
+  const key = req.originalUrl;
+  const cachedResponse = cache.get(key);
+  if (cachedResponse) {
+    return res.send(cachedResponse);
+  }
+  res.sendResponse = res.send;
+  res.send = (body) => {
+    cache.set(key, body);
+    res.sendResponse(body);
+  };
+  next();
+};
+
+// Routes
 userrouter.post("/data", async (req, res) => {
   const dat = await Data.create(req.body);
   res.send(dat);
 });
 
-userrouter.get("/data", async (req, res) => {
+userrouter.get("/data", cacheMiddleware, async (req, res) => {
   const dat = await Data.find();
   res.send(dat);
 });
@@ -137,7 +157,7 @@ userrouter.post("/addcart", async (req, res) => {
   }
 });
 
-userrouter.post("/getcart", async (req, res) => {
+userrouter.post("/getcart", cacheMiddleware, async (req, res) => {
   try {
     const items = await Item.find(req.body);
     res.status(200).send(items);
@@ -151,7 +171,6 @@ userrouter.post("/getcart", async (req, res) => {
 userrouter.post("/itemexists", async (req, res) => {
   try {
     const items = await Item.find(req.body);
-
     if (items.length > 0) res.status(200).send(items);
     else {
       res.status(404).send("Item not found in the cart");
@@ -165,13 +184,15 @@ userrouter.post("/itemexists", async (req, res) => {
 
 userrouter.delete("/deletecart", async (req, res) => {
   try {
-    const { email, product_name } = req.body;
     const response = await Item.deleteOne(req.body);
     res.send(response);
   } catch (error) {
     res
       .status(500)
-      .send({ error: "Failed to retrieve cart items", details: error.message });
+      .send({
+        error: "Failed to delete item from cart",
+        details: error.message,
+      });
   }
 });
 
@@ -180,7 +201,9 @@ userrouter.delete("/deleteall", async (req, res) => {
     const response = await Item.deleteMany(req.body);
     res.send(response);
   } catch (error) {
-    res.send({ error: "Failed to delete all items", details: error.message });
+    res
+      .status(500)
+      .send({ error: "Failed to delete all items", details: error.message });
   }
 });
 
@@ -188,15 +211,12 @@ userrouter.put("/address", async (req, res) => {
   try {
     const response = await User.findOneAndUpdate(
       { email: req.body.email },
-      {
-        address: req.body.address,
-      }
+      { address: req.body.address },
+      { new: true } // To return the updated document
     );
-    console.log("Address Updated");
     res.send("Address Updated");
   } catch (error) {
-    console.log("Error posting addresss");
-    res.send("error");
+    res.status(500).send("Error updating address");
   }
 });
 
@@ -206,13 +226,16 @@ userrouter.post("/address", async (req, res) => {
 });
 
 userrouter.put("/qty", async (req, res) => {
-  const data = await Item.findOneAndUpdate(
-    { product_name: req.body.product_name, email: req.body.email },
-    {
-      qty: req.body.qty,
-    }
-  );
-  res.send(data);
+  try {
+    const data = await Item.findOneAndUpdate(
+      { product_name: req.body.product_name, email: req.body.email },
+      { qty: req.body.qty },
+      { new: true } // To return the updated document
+    );
+    res.send(data);
+  } catch (error) {
+    res.status(500).send("Error updating quantity");
+  }
 });
 
 module.exports = userrouter;
