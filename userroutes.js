@@ -1,12 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const validator = require("validator");
-const NodeCache = require("node-cache");
 const userrouter = express.Router();
 userrouter.use(express.json());
-
-// Initialize cache
-const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -94,28 +90,13 @@ const Data = mongoose.model("Data", dataSchema);
 const Item = mongoose.model("Item", itemSchema);
 const User = mongoose.model("User", userSchema);
 
-// Caching middleware
-const cacheMiddleware = (req, res, next) => {
-  const key = req.originalUrl;
-  const cachedResponse = cache.get(key);
-  if (cachedResponse) {
-    return res.send(cachedResponse);
-  }
-  res.sendResponse = res.send;
-  res.send = (body) => {
-    cache.set(key, body);
-    res.sendResponse(body);
-  };
-  next();
-};
-
 // Routes
 userrouter.post("/data", async (req, res) => {
   const dat = await Data.create(req.body);
   res.send(dat);
 });
 
-userrouter.get("/data", cacheMiddleware, async (req, res) => {
+userrouter.get("/data", async (req, res) => {
   const dat = await Data.find();
   res.send(dat);
 });
@@ -157,7 +138,7 @@ userrouter.post("/addcart", async (req, res) => {
   }
 });
 
-userrouter.post("/getcart", cacheMiddleware, async (req, res) => {
+userrouter.post("/getcart", async (req, res) => {
   try {
     const items = await Item.find(req.body);
     res.status(200).send(items);
@@ -187,12 +168,10 @@ userrouter.delete("/deletecart", async (req, res) => {
     const response = await Item.deleteOne(req.body);
     res.send(response);
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        error: "Failed to delete item from cart",
-        details: error.message,
-      });
+    res.status(500).send({
+      error: "Failed to delete item from cart",
+      details: error.message,
+    });
   }
 });
 
