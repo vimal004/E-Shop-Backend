@@ -44,15 +44,13 @@ const cartSchema = new mongoose.Schema({
       product_name: {
         type: String,
         required: true,
+        unique: true,
       },
       price: String,
       rating: String,
       features: [String],
       image_link: String,
-      qty: {
-        type: Number,
-        default: 1, // Default quantity when adding an item
-      },
+      qty: Number,
     },
   ],
 });
@@ -128,62 +126,29 @@ userrouter.post("/login", async (req, res) => {
 });
 
 userrouter.post("/addcart", async (req, res) => {
-  const { email, product_name, price, rating, features, image_link } = req.body;
+  const { email, ...itemData } = req.body;
 
   try {
-    // Find the user's cart
-    const userCart = await Item.findOne({ email });
+    // Check if the cart exists for the user
+    let cart = await Cart.findOne({ email });
 
-    if (userCart) {
-      // Check if the item already exists in the cart
-      const existingItemIndex = userCart.items.findIndex(
-        (item) => item.product_name === product_name
-      );
-
-      if (existingItemIndex > -1) {
-        // If it exists, update the quantity
-        userCart.items[existingItemIndex].qty += 1; // Increment the quantity
-      } else {
-        // If it does not exist, add a new item
-        userCart.items.push({
-          product_name,
-          price,
-          rating,
-          features,
-          image_link,
-          qty: 1, // Start with 1
-        });
-      }
-
-      // Save the updated cart
-      await userCart.save();
-      return res.status(200).send(userCart);
+    if (cart) {
+      // If the cart exists, add the item to the items array
+      cart.items.push(itemData);
+      await cart.save();
+      return res.status(200).send(cart);
     } else {
-      // If no cart exists for the user, create a new one
-      const newCart = new Item({
-        email,
-        items: [
-          {
-            product_name,
-            price,
-            rating,
-            features,
-            image_link,
-            qty: 1,
-          },
-        ],
-      });
-      const savedCart = await newCart.save();
-      return res.status(201).send(savedCart);
+      // If the cart does not exist, create a new cart document
+      cart = new Cart({ email, items: [itemData] });
+      await cart.save();
+      return res.status(201).send(cart);
     }
   } catch (error) {
-    res.status(500).send({
-      error: "Failed to add item to cart",
-      details: error.message,
-    });
+    res
+      .status(500)
+      .send({ error: "Failed to add item to cart", details: error.message });
   }
 });
-
 
 userrouter.post("/getcart", async (req, res) => {
   try {
