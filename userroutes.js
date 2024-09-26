@@ -125,7 +125,7 @@ userrouter.post("/login", async (req, res) => {
   }
 });
 
-router.post("/addcart", async (req, res) => {
+userrouter.post("/addcart", async (req, res) => {
   const { email, ...itemData } = req.body;
 
   try {
