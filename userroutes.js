@@ -130,11 +130,11 @@ router.post("/addcart", async (req, res) => {
 
   try {
     // Check if the cart exists for the user
-    let cart = await Cart.findOne({ email });
+    let num = await Cart.findOne({ email });
 
-    if (cart) {
+    if (num) {
       // If the cart exists, check if the item already exists
-      const itemExists = cart.items.some(
+      const itemExists = num.items.some(
         (item) => item.product_name === itemData.product_name
       );
 
@@ -143,14 +143,14 @@ router.post("/addcart", async (req, res) => {
       }
 
       // Add the new item to the cart
-      cart.items.push(itemData);
-      await cart.save();
-      return res.status(200).send(cart);
+      num.items.push(itemData);
+      await num.save();
+      return res.status(200).send(num);
     } else {
       // If the cart does not exist, create a new cart document
-      cart = new Cart({ email, items: [itemData] });
-      await cart.save();
-      return res.status(201).send(cart);
+      num = new Cart({ email, items: [itemData] });
+      await num.save();
+      return res.status(201).send(num);
     }
   } catch (error) {
     res
