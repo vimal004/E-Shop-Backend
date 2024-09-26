@@ -134,6 +134,12 @@ userrouter.post("/addcart", async (req, res) => {
 
     if (cart) {
       // If the cart exists, add the item to the items array
+      const num = cart.items.filter(
+        (item) => item.product_name !== itemData.product_name
+      );
+      if (num.length > 0) {
+        return res.status(400).send("Item already exists in the cart");
+      }
       cart.items.push(itemData);
       await cart.save();
       return res.status(200).send(cart);
