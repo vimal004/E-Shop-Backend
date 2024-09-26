@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const validator = require("validator");
+const nodecache = require("node-cache");
 const userrouter = express.Router();
 userrouter.use(express.json());
+const myCache = new nodecache();
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -97,7 +99,11 @@ userrouter.post("/data", async (req, res) => {
 });
 
 userrouter.get("/data", async (req, res) => {
+  if (myCache.has("data")) {
+    return res.send(myCache.get("data"));
+  }
   const dat = await Data.find();
+  myCache.set("data", dat, 300);
   res.send(dat);
 });
 
