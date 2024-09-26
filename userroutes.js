@@ -43,7 +43,7 @@ const cartSchema = new mongoose.Schema({
     {
       product_name: {
         type: String,
-        required: true, 
+        required: true,
         unique: true,
       },
       price: String,
