@@ -6,6 +6,7 @@ const userrouter = express.Router();
 userrouter.use(express.json());
 const myCache = new nodecache();
 
+// User Schema
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -28,27 +29,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const itemSchema = new mongoose.Schema({
-  product_name: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: String,
-    required: true,
-  },
-  features: {
-    type: [String],
-    required: true,
-  },
-  image_link: {
-    type: String,
-    required: true,
-  },
+// Cart Schema
+const cartSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
@@ -57,11 +39,19 @@ const itemSchema = new mongoose.Schema({
       message: (props) => `${props.value} is not a valid email address!`,
     },
   },
-  qty: {
-    type: Number,
-  },
+  items: [
+    {
+      product_name: String,
+      price: String,
+      rating: String,
+      features: [String],
+      image_link: String,
+      qty: Number,
+    },
+  ],
 });
 
+// Data Schema
 const dataSchema = new mongoose.Schema({
   id: { type: Number, required: true },
   product_name: {
@@ -87,8 +77,8 @@ const dataSchema = new mongoose.Schema({
   },
 });
 
+const Cart = mongoose.model("Cart", cartSchema);
 const Data = mongoose.model("Data", dataSchema);
-const Item = mongoose.model("Item", itemSchema);
 const User = mongoose.model("User", userSchema);
 
 // Routes
@@ -132,10 +122,23 @@ userrouter.post("/login", async (req, res) => {
 });
 
 userrouter.post("/addcart", async (req, res) => {
+  const { email, ...itemData } = req.body;
+
   try {
-    const newItem = new Item(req.body);
-    const result = await newItem.save();
-    res.status(201).send(result);
+    // Check if the cart exists for the user
+    let cart = await Cart.findOne({ email });
+
+    if (cart) {
+      // If the cart exists, add the item to the items array
+      cart.items.push(itemData);
+      await cart.save();
+      return res.status(200).send(cart);
+    } else {
+      // If the cart does not exist, create a new cart document
+      cart = new Cart({ email, items: [itemData] });
+      await cart.save();
+      return res.status(201).send(cart);
+    }
   } catch (error) {
     res
       .status(500)
@@ -145,8 +148,12 @@ userrouter.post("/addcart", async (req, res) => {
 
 userrouter.post("/getcart", async (req, res) => {
   try {
-    const items = await Item.find(req.body);
-    res.status(200).send(items);
+    const cart = await Cart.findOne({ email: req.body.email });
+    if (cart) {
+      res.status(200).send(cart.items);
+    } else {
+      res.status(404).send("Cart not found");
+    }
   } catch (error) {
     res
       .status(500)
@@ -156,10 +163,18 @@ userrouter.post("/getcart", async (req, res) => {
 
 userrouter.post("/itemexists", async (req, res) => {
   try {
-    const items = await Item.find(req.body);
-    if (items.length > 0) res.status(200).send(items);
-    else {
-      res.status(404).send("Item not found in the cart");
+    const cart = await Cart.findOne({ email: req.body.email });
+    if (cart) {
+      const items = cart.items.filter(
+        (item) => item.product_name === req.body.product_name
+      );
+      if (items.length > 0) {
+        res.status(200).send(items);
+      } else {
+        res.status(404).send("Item not found in the cart");
+      }
+    } else {
+      res.status(404).send("Cart not found");
     }
   } catch (error) {
     res
@@ -169,9 +184,20 @@ userrouter.post("/itemexists", async (req, res) => {
 });
 
 userrouter.delete("/deletecart", async (req, res) => {
+  const { email, product_name } = req.body;
+
   try {
-    const response = await Item.deleteOne(req.body);
-    res.send(response);
+    const cart = await Cart.findOne({ email });
+
+    if (cart) {
+      cart.items = cart.items.filter(
+        (item) => item.product_name !== product_name
+      );
+      await cart.save();
+      res.send(cart);
+    } else {
+      res.status(404).send("Cart not found");
+    }
   } catch (error) {
     res.status(500).send({
       error: "Failed to delete item from cart",
@@ -181,8 +207,10 @@ userrouter.delete("/deletecart", async (req, res) => {
 });
 
 userrouter.delete("/deleteall", async (req, res) => {
+  const { email } = req.body;
+
   try {
-    const response = await Item.deleteMany(req.body);
+    const response = await Cart.deleteOne({ email });
     res.send(response);
   } catch (error) {
     res
@@ -210,13 +238,24 @@ userrouter.post("/address", async (req, res) => {
 });
 
 userrouter.put("/qty", async (req, res) => {
+  const { email, product_name, qty } = req.body;
+
   try {
-    const data = await Item.findOneAndUpdate(
-      { product_name: req.body.product_name, email: req.body.email },
-      { qty: req.body.qty },
-      { new: true } // To return the updated document
-    );
-    res.send(data);
+    const cart = await Cart.findOne({ email });
+    if (cart) {
+      const item = cart.items.find(
+        (item) => item.product_name === product_name
+      );
+      if (item) {
+        item.qty = qty;
+        await cart.save();
+        res.send(item);
+      } else {
+        res.status(404).send("Item not found in the cart");
+      }
+    } else {
+      res.status(404).send("Cart not found");
+    }
   } catch (error) {
     res.status(500).send("Error updating quantity");
   }
