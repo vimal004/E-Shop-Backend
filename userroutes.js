@@ -31,7 +31,6 @@ const userSchema = new mongoose.Schema({
 const itemSchema = new mongoose.Schema({
   product_name: {
     type: String,
-    unique: true,
     required: true,
   },
   price: {
