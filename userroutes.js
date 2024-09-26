@@ -41,11 +41,7 @@ const cartSchema = new mongoose.Schema({
   },
   items: [
     {
-      product_name: {
-        type: String,
-        required: true,
-        unique: true,
-      },
+      product_name: String,
       price: String,
       rating: String,
       features: [String],
@@ -130,27 +126,18 @@ userrouter.post("/addcart", async (req, res) => {
 
   try {
     // Check if the cart exists for the user
-    let num = await Cart.findOne({ email });
+    let cart = await Cart.findOne({ email });
 
-    if (num) {
-      // If the cart exists, check if the item already exists
-      const itemExists = num.items.some(
-        (item) => item.product_name === itemData.product_name
-      );
-
-      if (itemExists) {
-        return res.status(400).send("Item already exists in the cart");
-      }
-
-      // Add the new item to the cart
-      num.items.push(itemData);
-      await num.save();
-      return res.status(200).send(num);
+    if (cart) {
+      // If the cart exists, add the item to the items array
+      cart.items.push(itemData);
+      await cart.save();
+      return res.status(200).send(cart);
     } else {
       // If the cart does not exist, create a new cart document
-      num = new Cart({ email, items: [itemData] });
-      await num.save();
-      return res.status(201).send(num);
+      cart = new Cart({ email, items: [itemData] });
+      await cart.save();
+      return res.status(201).send(cart);
     }
   } catch (error) {
     res
@@ -158,7 +145,6 @@ userrouter.post("/addcart", async (req, res) => {
       .send({ error: "Failed to add item to cart", details: error.message });
   }
 });
-
 
 userrouter.post("/getcart", async (req, res) => {
   try {
