@@ -130,8 +130,11 @@ userrouter.post("/addcart", async (req, res) => {
 
     if (cart) {
       // If the cart exists, add the item to the items array
-      cart.items.push(itemData);
-      await cart.save();
+      cart.items = cart.items.map((item) => {
+        if (item.product_name === itemData.product_name) {
+          item.qty += itemData.qty;
+        }
+      });
       return res.status(200).send(cart);
     } else {
       // If the cart does not exist, create a new cart document
