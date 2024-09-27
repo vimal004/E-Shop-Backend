@@ -129,12 +129,21 @@ userrouter.post("/addcart", async (req, res) => {
     let cart = await Cart.findOne({ email });
 
     if (cart) {
-      // If the cart exists, add the item to the items array
-      cart.items = cart.items.map((item) => {
-        if (item.product_name === itemData.product_name) {
-          item.qty += itemData.qty;
-        }
-      });
+      // Check if the item already exists in the cart
+      const itemIndex = cart.items.findIndex(
+        (item) => item.product_name === itemData.product_name
+      );
+
+      if (itemIndex > -1) {
+        // If the item exists, update the quantity
+        cart.items[itemIndex].qty += itemData.qty;
+      } else {
+        // If the item doesn't exist, push the new item
+        cart.items.push(itemData);
+      }
+
+      // Save the updated cart
+      await cart.save();
       return res.status(200).send(cart);
     } else {
       // If the cart does not exist, create a new cart document
@@ -148,6 +157,7 @@ userrouter.post("/addcart", async (req, res) => {
       .send({ error: "Failed to add item to cart", details: error.message });
   }
 });
+
 
 userrouter.post("/getcart", async (req, res) => {
   try {
