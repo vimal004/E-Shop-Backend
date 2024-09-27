@@ -41,7 +41,10 @@ const cartSchema = new mongoose.Schema({
   },
   items: [
     {
-      product_name: String,
+      product_name: {
+        type: String, // Make sure there's no `unique: true` here
+        required: true,
+      },
       price: String,
       rating: String,
       features: [String],
@@ -157,7 +160,6 @@ userrouter.post("/addcart", async (req, res) => {
       .send({ error: "Failed to add item to cart", details: error.message });
   }
 });
-
 
 userrouter.post("/getcart", async (req, res) => {
   try {
