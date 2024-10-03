@@ -248,7 +248,7 @@ userrouter.put("/address", async (req, res) => {
 });
 
 userrouter.get("/address", async (req, res) => {
-  const response = await User.findOne(req.body);
+  const response = await User.findOne(req.body.email);
   res.send(response.address); 
 });
 
