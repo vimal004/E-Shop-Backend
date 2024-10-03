@@ -247,6 +247,11 @@ userrouter.put("/address", async (req, res) => {
   }
 });
 
+userrouter.get("/address", async (req, res) => {
+  const response = await User.findOne(req.body);
+  res.send(response.address); 
+});
+
 userrouter.post("/address", async (req, res) => {
   const response = await User.findOne(req.body);
   res.send(response);
