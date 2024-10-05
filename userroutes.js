@@ -249,26 +249,8 @@ userrouter.put("/address", async (req, res) => {
 
 userrouter.get("/address", async (req, res) => {
   const response = await User.findOne(req.body.email);
-  res.send(response.address); 
+  res.send(response.address);
 });
-
-userrouter.put("/address", async (req, res) => {
-  try {
-    const response = await User.findOneAndUpdate(
-      { email: req.body.email },
-      { address: req.body.address },
-      { new: true }
-    );
-    if (response) {
-      res.status(200).send("Address Updated");
-    } else {
-      res.status(404).send("User not found");
-    }
-  } catch (error) {
-    res.status(500).send("Error updating address");
-  }
-});
-
 
 userrouter.post("/address", async (req, res) => {
   const response = await User.findOne(req.body);
@@ -298,55 +280,5 @@ userrouter.put("/qty", async (req, res) => {
     res.status(500).send("Error updating quantity");
   }
 });
-
-userrouter.post("/firebaseLogin", async (req, res) => {
-  const { email, displayName } = req.body; // assuming these come from Firebase
-  try {
-    let user = await User.findOne({ email });
-    if (!user) {
-      // If the user doesn't exist, create one
-      user = new User({
-        email,
-        password: "", // No need for password if it's Google login
-        address: "", // Empty address to be updated later
-      });
-      await user.save();
-    }
-    res.status(200).send(user);
-  } catch (error) {
-    res.status(500).send("Error during Firebase login");
-  }
-});
-
-const reviewSchema = new mongoose.Schema({
-  productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
-  name: String,
-  rating: Number,
-  comment: String,
-});
-
-const Review = mongoose.model("Review", reviewSchema);
-
-app.get("/api/users/reviews/:id", async (req, res) => {
-  try {
-    const reviews = await Review.find({ productId: req.params.id });
-    res.json(reviews);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching reviews" });
-  }
-});
-
-// Add a review
-app.post("/api/users/addreview", async (req, res) => {
-  const { productId, name, rating, comment } = req.body;
-  const newReview = new Review({ productId, name, rating, comment });
-  try {
-    const savedReview = await newReview.save();
-    res.status(201).json(savedReview);
-  } catch (error) {
-    res.status(400).json({ message: "Error adding review" });
-  }
-});
-
 
 module.exports = userrouter;
