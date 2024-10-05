@@ -95,6 +95,15 @@ const Data = mongoose.model("Data", dataSchema);
 const User = mongoose.model("User", userSchema);
 const Review = mongoose.model("Review", reviewSchema);
 
+userrouter.get(`review/${product_name}`, async (req, res) => {
+  try {
+    const review = await Review.findOne({ product_name });
+    res.status(200).send(review);
+  } catch (error) {
+    res.status(500).send("Failed to retrieve reviews");
+  }
+});
+
 userrouter.post("/review", async (req, res) => {
   const { product_name, comments, rating } = req.body;
 
@@ -120,7 +129,7 @@ userrouter.post("/review", async (req, res) => {
 
 userrouter.get("/review", async (req, res) => {
   try {
-    const reviews = await Review.find();  
+    const reviews = await Review.find();
     res.status(200).send(reviews);
   } catch (error) {
     res.status(500).send("Failed to retrieve reviews");
