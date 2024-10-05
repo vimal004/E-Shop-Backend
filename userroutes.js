@@ -120,7 +120,7 @@ userrouter.post("/review", async (req, res) => {
 
 userrouter.get("/review", async (req, res) => {
   try {
-    const reviews = await Review.find(req.body);  
+    const reviews = await Review.find();  
     res.status(200).send(reviews);
   } catch (error) {
     res.status(500).send("Failed to retrieve reviews");
