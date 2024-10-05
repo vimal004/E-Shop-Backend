@@ -97,7 +97,7 @@ const Review = mongoose.model("Review", reviewSchema);
 
 userrouter.get(`review/${product_name}`, async (req, res) => {
   try {
-    const review = await Review.findOne({ product_name });
+    const review = await Review.findOne({ product_name: req.params.product_name });
     res.status(200).send(review);
   } catch (error) {
     res.status(500).send("Failed to retrieve reviews");
