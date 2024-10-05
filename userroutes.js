@@ -10,6 +10,7 @@ const reviewSchema = new mongoose.Schema({
   product_name: { type: String, required: true },
   reviews: [
     {
+      name: { type: String, required: true },
       comments: { type: String, required: true },
       rating: { type: Number, required: true },
     },
@@ -105,19 +106,19 @@ userrouter.get("/review", async (req, res) => {
 });
 
 userrouter.post("/review", async (req, res) => {
-  const { product_name, comments, rating } = req.body;
+  const { product_name, name, comments, rating } = req.body;
 
   try {
     let review = await Review.findOne({ product_name });
 
     if (review) {
-      review.reviews.push({ comments, rating });
+      review.reviews.push({ name, comments, rating });
       await review.save();
       res.status(200).send(review);
     } else {
       review = new Review({
         product_name,
-        reviews: [{ comments, rating }],
+        reviews: [{ name, comments, rating }],
       });
       await review.save();
       res.status(201).send(review);
