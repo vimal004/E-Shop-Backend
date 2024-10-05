@@ -95,10 +95,10 @@ const Data = mongoose.model("Data", dataSchema);
 const User = mongoose.model("User", userSchema);
 const Review = mongoose.model("Review", reviewSchema);
 
-userrouter.get(`review/${product_name}`, async (req, res) => {
+userrouter.get("/review", async (req, res) => {
   try {
-    const review = await Review.findOne({ product_name: req.params.product_name });
-    res.status(200).send(review);
+    const reviews = await Review.findOne(req.body);
+    res.status(200).send(reviews);
   } catch (error) {
     res.status(500).send("Failed to retrieve reviews");
   }
