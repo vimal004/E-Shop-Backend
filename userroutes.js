@@ -318,5 +318,35 @@ userrouter.post("/firebaseLogin", async (req, res) => {
   }
 });
 
+const reviewSchema = new mongoose.Schema({
+  productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+  name: String,
+  rating: Number,
+  comment: String,
+});
+
+const Review = mongoose.model("Review", reviewSchema);
+
+app.get("/api/users/reviews/:id", async (req, res) => {
+  try {
+    const reviews = await Review.find({ productId: req.params.id });
+    res.json(reviews);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching reviews" });
+  }
+});
+
+// Add a review
+app.post("/api/users/addreview", async (req, res) => {
+  const { productId, name, rating, comment } = req.body;
+  const newReview = new Review({ productId, name, rating, comment });
+  try {
+    const savedReview = await newReview.save();
+    res.status(201).json(savedReview);
+  } catch (error) {
+    res.status(400).json({ message: "Error adding review" });
+  }
+});
+
 
 module.exports = userrouter;
