@@ -6,6 +6,16 @@ const userrouter = express.Router();
 userrouter.use(express.json());
 const myCache = new nodecache();
 
+const reviewSchema = new mongoose.Schema({
+  product_name: { type: String, required: true },
+  reviews: [
+    {
+      comments: { type: String, required: true },
+      rating: { type: Number, required: true },
+    },
+  ],
+});
+
 // User Schema
 const userSchema = new mongoose.Schema({
   email: {
@@ -83,6 +93,39 @@ const dataSchema = new mongoose.Schema({
 const Cart = mongoose.model("Cart", cartSchema);
 const Data = mongoose.model("Data", dataSchema);
 const User = mongoose.model("User", userSchema);
+const Review = mongoose.model("Review", reviewSchema);
+
+userrouter.post("/review", async (req, res) => {
+  const { product_name, comments, rating } = req.body;
+
+  try {
+    let review = await Review.findOne({ product_name });
+
+    if (review) {
+      review.reviews.push({ comments, rating });
+      await review.save();
+      res.status(200).send(review);
+    } else {
+      review = new Review({
+        product_name,
+        reviews: [{ comments, rating }],
+      });
+      await review.save();
+      res.status(201).send(review);
+    }
+  } catch (error) {
+    res.status(500).send("Failed to add review");
+  }
+});
+
+userrouter.get("/review", async (req, res) => {
+  try {
+    const reviews = await Review.find(req.body);  
+    res.status(200).send(reviews);
+  } catch (error) {
+    res.status(500).send("Failed to retrieve reviews");
+  }
+});
 
 // Routes
 userrouter.post("/data", async (req, res) => {
