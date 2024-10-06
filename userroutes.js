@@ -96,7 +96,7 @@ const Data = mongoose.model("Data", dataSchema);
 const User = mongoose.model("User", userSchema);
 const Review = mongoose.model("Review", reviewSchema);
 
-userrouter.get("/review", async (req, res) => {
+userrouter.post("/review", async (req, res) => {
   try {
     const reviews = await Review.findOne(req.body);
     res.status(200).send(reviews);
