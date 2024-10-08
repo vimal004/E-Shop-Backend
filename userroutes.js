@@ -10,7 +10,7 @@ const reviewSchema = new mongoose.Schema({
   product_name: { type: String, required: true },
   reviews: [
     {
-      name: { type: String, required: true, unique: true },
+      name: { type: String, required: true },
       comments: { type: String, required: true },
       rating: { type: Number, required: true },
     },
@@ -112,10 +112,20 @@ userrouter.post("/review", async (req, res) => {
     let review = await Review.findOne({ product_name });
 
     if (review) {
+      // Check if the reviewer with the same name already exists
+      const existingReview = review.reviews.find((r) => r.name === name);
+      if (existingReview) {
+        return res
+          .status(400)
+          .send("Reviewer has already posted a review for this product.");
+      }
+
+      // Add the new review if the reviewer does not exist
       review.reviews.push({ name, comments, rating });
       await review.save();
       res.status(200).send(review);
     } else {
+      // Create a new product review
       review = new Review({
         product_name,
         reviews: [{ name, comments, rating }],
