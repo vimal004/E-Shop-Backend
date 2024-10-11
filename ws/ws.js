@@ -6,7 +6,14 @@ const cors = require("cors");
 const app = express();
 app.use(cors()); // Enable CORS
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "https://e-shop-gamma-sepia.vercel.app", // replace with your frontend URL
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true, // enable cookies
+  },
+});
 
 app.get("/", (req, res) => {
   res.send("Socket.IO server is running");
