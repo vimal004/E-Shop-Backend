@@ -1,23 +1,24 @@
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
-const cors = require("cors"); 
+const cors = require("cors");
 
 const app = express();
 app.use(cors()); // Enable CORS
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://e-shop-gamma-sepia.vercel.app", // replace with your frontend URL
+    origin: "https://e-shop-gamma-sepia.vercel.app", // Replace with your frontend URL
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
-    credentials: true, // enable cookies
+    credentials: true, // Enable cookies
   },
 });
 
 app.get("/", (req, res) => {
   res.send("Socket.IO server is running");
 });
+
 // When a new client connects
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
@@ -38,5 +39,5 @@ io.on("connection", (socket) => {
 
 const port = process.env.PORT || 8080;
 server.listen(port, () => {
-  console.log("Socket.IO server running on port 8080");
+  console.log("Socket.IO server running on port", port);
 });
