@@ -11,7 +11,7 @@ app.use(cors()); // Enable CORS for cross-origin requests
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://your-frontend-url.com", // Your frontend URL
+    origin: "https://e-shop-gamma-sepia.vercel.app", // Your frontend URL
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true,
