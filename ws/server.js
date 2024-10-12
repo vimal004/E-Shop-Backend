@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
   // Listen for "message" event
   socket.on("message", (msg) => {
     console.log(msg);
-    io.emit("message", msg); // Broadcast the message to all clients
+    io.emit("message", { role: "Support", content: "Customer Support Reply" }); // Broadcast the message to all clients
   });
 
   // Handle disconnection
