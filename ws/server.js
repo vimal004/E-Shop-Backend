@@ -1,43 +1,47 @@
 const express = require("express");
-const http = require("http");
 const { Server } = require("socket.io");
+const { createServer } = require("http");
 const cors = require("cors");
 
 const app = express();
-app.use(cors()); // Enable CORS
 
-const server = http.createServer(app);
+// Middleware
+app.use(cors());
+
+// Create HTTP server
+const server = createServer(app);
+
+// Create a Socket.IO server and pass the HTTP server to it
 const io = new Server(server, {
   cors: {
-    origin: "*", // Adjust with your frontend URL
+    origin: "http://localhost:5173", // Frontend URL
     methods: ["GET", "POST"],
-    credentials: true,
   },
 });
 
+// Root endpoint
 app.get("/", (req, res) => {
-  res.send("Socket.IO server is running");
+  res.send("Hello World!");
 });
 
-// When a new client connects
+// Handle socket connection
 io.on("connection", (socket) => {
-  console.log("A user connected:", socket.id);
+  console.log("a user connected with id: " + socket.id);
 
-  // Listen for incoming chat messages
-  socket.on("message", (data) => {
-    console.log("Message from client:", data);
-
-    // Broadcast the message to all connected clients
-    io.emit("message", data);
+  // Listen for "message" event
+  socket.on("message", (msg) => {
+    console.log(msg);
+    io.emit("message", msg); // Broadcast the message to all clients
   });
 
   // Handle disconnection
   socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+    console.log("user disconnected: " + socket.id);
   });
 });
 
-const port = process.env.PORT || 8080;
+// Start the server
+const port = process.env.PORT || 3000;
 server.listen(port, () => {
-  console.log("Socket.IO server running on port", port);
+  console.log("Server is running on port " + port);
 });
