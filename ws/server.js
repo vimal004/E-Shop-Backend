@@ -48,25 +48,24 @@ io.on("connection", (socket) => {
       // Notify the client and executive of the connection
       io.to(socket.id).emit("message", {
         role: "Support",
-        content: `You have been connected to executive: ${assignedExecutive}`,
+        content: `You have been connected to an executive`,
       });
       io.to(assignedExecutive).emit("message", {
         role: "Support",
         content: `You have been assigned a client: ${socket.id}`,
       });
     } else {
+      io.to(socket.id).emit("message", {
+        role: "Support",
+        content: "All executives are currently busy. Please wait.",
+      });
     }
   });
 
   // Handle messages from clients
   socket.on("message", (msg) => {
     console.log(`Message received from ${socket.id}: ${msg.content}`);
-    if (!availableExecutives.length > 0 && msg.role === "user") {
-      io.to(socket.id).emit("message", {
-        role: "Support",
-        content: "All executives are currently busy. Please wait.",
-      });
-    }
+
     // Check if it's a client and send the message to their assigned executive
     if (clientsToExecutives[socket.id]) {
       const assignedExecutive = clientsToExecutives[socket.id];
