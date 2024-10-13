@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
   // Handle messages from clients
   socket.on("message", (msg) => {
     console.log(`Message received from ${socket.id}: ${msg.content}`);
-    if (!availableExecutives.length > 0) {
+    if (!availableExecutives.length > 0 && !clientsToExecutives[socket.id]) {
       io.to(socket.id).emit("message", {
         role: "Support",
         content: `Executive is not available. Please wait.`,
