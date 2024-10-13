@@ -37,8 +37,6 @@ io.on("connection", (socket) => {
     availableExecutives.push(socket.id); // Add the executive to the available list
   });
 
-  
-
   // Listen for "registerClient" to mark a user as a client
   socket.on("registerClient", () => {
     console.log(`Client joined: ${socket.id}`);
@@ -46,9 +44,7 @@ io.on("connection", (socket) => {
       // Assign an executive to the client
       const assignedExecutive = availableExecutives.shift(); // Remove the executive from the available list
       clientsToExecutives[socket.id] = assignedExecutive;
-
-      socket.emit("clientAssigned", socket.id); // Notify the client of their assignment
-
+      io.to(assignedExecutive).emit("assignedClient", socket.id); // Notify the executive of the client assignment
       // Notify the client and executive of the connection
       io.to(socket.id).emit("message", {
         role: "Support",
