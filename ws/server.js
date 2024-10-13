@@ -47,6 +47,8 @@ io.on("connection", (socket) => {
       const assignedExecutive = availableExecutives.shift(); // Remove the executive from the available list
       clientsToExecutives[socket.id] = assignedExecutive;
 
+      socket.emit("clientAssigned", socket.id); // Notify the client of their assignment
+
       // Notify the client and executive of the connection
       io.to(socket.id).emit("message", {
         role: "Support",
