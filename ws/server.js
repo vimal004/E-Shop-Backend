@@ -37,6 +37,8 @@ io.on("connection", (socket) => {
     availableExecutives.push(socket.id); // Add the executive to the available list
   });
 
+  
+
   // Listen for "registerClient" to mark a user as a client
   socket.on("registerClient", () => {
     console.log(`Client joined: ${socket.id}`);
@@ -55,24 +57,23 @@ io.on("connection", (socket) => {
         content: `You have been assigned a client: ${socket.id}`,
       });
     } else {
-      io.to(socket.id).emit("message", {
-        role: "Support",
-        content: "All executives are currently busy. Please wait.",
-      });
     }
   });
 
   // Handle messages from clients
   socket.on("message", (msg) => {
     console.log(`Message received from ${socket.id}: ${msg.content}`);
-
-    // Check if it's a client and send the message to their assigned executive
-    if (clientsToExecutives[socket.id]) {
-      const assignedExecutive = clientsToExecutives[socket.id];
-      io.to(assignedExecutive).emit("message", {
-        role: "Client",
-        content: msg,
+    if (!availableExecutives.length > 0) {
+      io.to(socket.id).emit("message", {
+        role: "Support",
+        content: `Executive is not available. Please wait.`,
       });
+    }
+
+    if (clientsToExecutives[socket.id]) {
+      // Check if it's a client and send the message to their assigned executive
+      const assignedExecutive = clientsToExecutives[socket.id];
+      io.to(assignedExecutive).emit("message", msg);
     }
   });
 
